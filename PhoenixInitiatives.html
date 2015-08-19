@@ -54,13 +54,13 @@
 	  .ol-popup-content {
 		font-family: Tahoma, Geneva, sans-serif;
 		font-weight: bold;
-		color: #6BB26B;
-		font-size: 14px;
+		color:  #33CCFF;
+		font-size: 12px;
 		}
 		.ol-popup-closer {
         text-decoration: none;
         position: absolute;
-		color: 'black';
+		color:  #33CCFF;
         top: 2px;
         right: 6px;
       }
@@ -68,18 +68,31 @@
 		content: "x";
 		}
 	   #toolbox       
-	   { position:absolute; top:550px; right:650px; padding:5px; border-radius:4px; color:#fff; border-style: double; background: rgba(66, 207, 112, 0.4); z-index:100; }
-	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
+	   { position:absolute; top:85px; right:50px; padding:5px; line-height: 0.02; border-radius:4px; color:#fff; border-style: double; background: rgba(3, 107, 60, 1.0); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
 	   
 	   #toolbox3       
-	   { position:absolute; top:100px; left:150px; padding:5px; border-radius:4px; border-style: double; color:black; background: rgba(243, 247, 131, 0.7); z-index:100; }
+	   { position:absolute; font-size: 16px; font-family: Tahoma, Geneva, sans-serif;  line-height: 2.0;top:100px; left:95px; padding:5px; color:black; background: rgba(250, 245, 245, 1.0); z-index:100; }
 	   
 	   p {
 	   font-family: Tahoma, Geneva, sans-serif;
-	   font-size: 18px;
+	   font-size: 18px;	   color: #33CCFF;
+	   }
+	   	   	   p1 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   font-size: 18px;	   color: blue;
 	   }
 	   h1 {
 	   font-family: Tahoma, Geneva, sans-serif;
+	   color: #33CCFF;
+	   }
+	   	   li {
+	   font-family: Tahoma, Geneva, sans-serif;
+font-size: 14px;
+	   }
+	   	   h4 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   color: #33CCFF;	font-size: 14px;
 	   }
 	   #Phoenix {
 	color: 	#004C2E; 
@@ -87,6 +100,14 @@
 	font-size: 20px;
 	font-weight: bold;
 	}
+		#columns{
+	    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
+}
     </style>
     <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
 	<script src="v3.1.1/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
@@ -108,24 +129,33 @@
 	
 <div id="toolbox">	
 <ul id ="layerswitcher">
-<li><h3> Energy </li></h3>
-<li><label><input type="checkbox" id="visible" checked> Solar </label></li>
-<li><h3> Infrastructure </li></h3>
-<li><label><input type="checkbox" id="visible1" checked> Green Building </label></li>
-<li><h3> Transportation </li></h3>
-<li><label><input type="checkbox" id="visible2" checked> Bikeshare </label></li>
-<li><h3> Urban Development </li></h3>
-<li><label><input type="checkbox" id="visible3" checked> Vacant Lot Revitalization </label></li>
-<li><label><input type="checkbox" id="visible4" checked> Sustainably Planned Park </label></li>
+<h4><a href="PhoenixDocuments.html"style="color: white">Click here to view plans/reports</a></h4><br>
+<li><h4> Energy </li></h4>
+<li><label><img src="Sun.png"/> Solar<input type="checkbox" id="visible" checked></label></li>
+<li><h4> Infrastructure </li></h4>
+<li><label><img src="Building1.png"style="width:30px;height:50px"/> Green Building<input type="checkbox" id="visible1" checked> </label></li>
+<li><label><img src="tree.png"style="width:35px;height:45px"/> Green Infrastructure <input type="checkbox" id="visible4" checked> </label>
+<li><h4> Transportation </li></h4>
+<li><label><img src="Bicycle.png"style="width:50px;height:35px"/> Bikeshare <input type="checkbox" id="visible2" checked> </label></li>
+<h4></h4>
+<li><label><img src="Ext.png"style="width:30px;height:20px"/> Light rail extension <input type="checkbox" id="visible5" checked> </label></li>
+<li><h4> Urban Farming/Forestry</h4></li>
+<li>None yet<li>
+<li><h4> Urban Renewal</h4></li>
+<li><label><img src="LotIcon.png"/> Vacant Lot Revitalization <input type="checkbox" id="visible3" checked> </label></li>
+<li><h4> Waste Recycling </li></h4>
+<li>None yet<li>
+</li>
 </ul>
 </div>
+</div>
+
 <div id="toolbox3">	
-<h1>Phoenix</h1>
-<p>Unique sustainability effort: Bikeshare</p>
-<p>Number of sustainability initiatives: 58</p>
-<a href="https://www.phoenix.gov/sustainability"><p>Visit the City of Phoenix sustainability webpage</p></a>
+City of Phoenix<br>
+<a href="https://www.phoenix.gov/sustainability" style="color: blue">Visit the City of Phoenix sustainability webpage</a>
 </div>
     <script type="text/javascript">
+	
 		var container = document.getElementById('popup');
     var content   = document.getElementById('popup-content');
     var closer    = document.getElementById('popup-closer');
@@ -167,19 +197,62 @@
 	})
 	})
 	});
+			
+	var LightRail = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'LightRailLine.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'black', width: 1}),
+			fill: new ol.style.Fill({color:'yellow'})
+		}),
+	});
+			
+	var LightRailExt = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'LightRailExt.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
+			fill: new ol.style.Fill({color:'yellow'})
+		}),
+	});
 	
 	var PhoenixBikeshare = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
 		url: 'PhoenixBikeshare.geojson'
 	}),
 	style: new ol.style.Style({
-	image: new ol.style.Circle({
-		radius: 4,
-		fill: new ol.style.Fill({
-		color: 'white'
-		})
+	image: new ol.style.Icon({
+	        anchor: [0.45, 14.8],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Bicycle.png',
 	})
 	})
+	});
+	
+	var bike = new ol.source.Vector({
+  features: new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixBikeshare.geojson'
+	})
+	})
+	})
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.45, 14.8],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Bicycle.png',
+	})
+	});
+	
+		
+	var cluster = new ol.source.Cluster({
+	distance:5, 
+	threshold: 3,
+	source: bike
 	});
 	
 	var B = new ol.layer.Vector({
@@ -201,7 +274,7 @@
 	        anchor: [0.3, 15],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'Building.png'
+            src: 'Building1.png'
 	})
 	})
 	});
@@ -228,25 +301,8 @@
 		}),
 		style: new ol.style.Style({
 		stroke: new ol.style.Stroke({color: 'black', width: 3}),
-		fill: new ol.style.Fill({color:'rgba(5,249,221,0.7)'})
+		fill: new ol.style.Fill({color:'rgba(177,228,250,.7)'})
 		}),
-		});
-	
-	var PhoenixEfforts = new ol.layer.Vector({
-		source: new ol.source.GeoJSON({
-			url:'PhoenixEfforts.geojson'
-		}),
-		style: new ol.style.Style({
-		image: new ol.style.Circle({
-				radius: 6,
-				fill: new ol.style.Fill({
-				color: '#00CC7A'
-				}),
-				stroke: new ol.style.Stroke({
-					color: 'black',
-					width: 1})
-		})
-		})
 		});
 		
       var map = new ol.Map({
@@ -264,8 +320,9 @@
 		  }),
 
 	Phoenix,
-	PhoenixEfforts,
 	B,
+	LightRail,
+	LightRailExt,
 	PhoenixBikeshare,
 	PhoenixSolar,
 	PhoenixGB,
@@ -294,6 +351,9 @@ visible3.bindTo('checked', PhoenixVacant, 'visible');
 var visible4 = new ol.dom.Input(document.getElementById('visible4'));
 visible4.bindTo('checked', PhoenixGP, 'visible');
 
+var visible5 = new ol.dom.Input(document.getElementById('visible5'));
+visible5.bindTo('checked', LightRailExt, 'visible');
+
 var pos = [-12480420.00, 3980209.00];
 
 var phx = new ol.Overlay({
@@ -307,7 +367,10 @@ map.addOverlay(phx);
       function(feature, layer) {
         return feature;
 	}, null, function(layer) {
-  return layer === PhoenixEfforts;
+  if(layer !==Phoenix){
+	return true;
+	}
+	return false;
 });
 
   var coordinate = evt.coordinate;
@@ -319,8 +382,8 @@ map.addOverlay(phx);
     if ( feature ) { 
     // if you clicked on a feature
     // console.log(feature.getProperties());
-    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>'+ '<p>' + feature.getProperties().Building + '</p>' + '<p>' + feature.getProperties().Location + '</p>' + '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().Info + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
-    container.style.display = 'block'; // actually show the container 
+    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + '<p>' + feature.getProperties().Building + '</p>'+ '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
+    container.style.display = 'block';// actually show the container 
   } else {
     // we did not click on a feature, so hide the container 
     content.innerHTML = '';

@@ -3,6 +3,6 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
                                                                                 
 "features": [
-{ "type": "Feature", "properties": { "City": "Tempe", "Initiative": "Urban Farm\/Forestry", "Location": "Rio Salado Golf Course, 1490 E Weber Dr. Tempe, AZ 85281", "Latitude": 33.446967, "Longitude": -111.912884, "Building": "Urban Farm", "URL_1": "<a href =\"http:\/\/www.tempe.gov\/city-hall\/public-works\/sustainable-tempe\/tempe-s-urban-farm\">See more<\/a>", "Info": null, "Describe": "Old golf course turned into an urban farm by Ken Singh" }, "geometry": { "type": "Point", "coordinates": [ -12458085.260086693, 3954782.6965437806 ] } }
+{ "type": "Feature", "properties": { "wkt_geom": "POINT(-12458085.26008669286966324 3954782.6965437806211412)", "City": "Tempe", "Initiative": "Urban Farm\/Forestry", "Location": "Rio Salado Golf Course, 1490 E Weber Dr. Tempe, AZ 85281", "Latitude": 33.446967, "Longitude": -111.912884, "Building": "Urban Farm", "URL_1": "<a href =\"http:\/\/www.tempe.gov\/city-hall\/public-works\/sustainable-tempe\/tempe-s-urban-farm\">Learn more<\/a>", "Info": null, "Describe": "Rio Salado golf course repurposed for urban agriculture." }, "geometry": { "type": "Point", "coordinates": [ -12458085.260086693, 3954782.7500248831 ] } }
 ]
 }

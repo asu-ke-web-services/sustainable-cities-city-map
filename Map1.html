@@ -8,15 +8,10 @@
         height: 100%;
         width: 100%;
       }
-		h2{
-		color: #0099FF; 
-		font-family: Tahoma, Geneva, sans-serif;
-		}
-	   #toolbox       
-	   {  position:absolute; top:750px; right:150px; padding:5px; border-radius:4px; color:#fff; background: rgba(66, 207, 112, 0.4); z-index:100; }
-	#layerswitcher { margin:0; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
+	  h1{color:#33CCFF;}
 	 #toolbox2       
-	   { position:absolute; font-size: 20px;top:200px; left:260px; padding:5px; font-family: Arial Black,Arial Bold,Gadget,sans-serif; border-radius:4px; color:#fff; background: rgba(3, 107, 60, 0.5); z-index:100; }
+	   { position:absolute; font-size: 20px;top:300px; left:270px; padding:5px; font-family: Arial Black,Arial Bold,Gadget,sans-serif; text-align: center; border-radius:4px; color:black; background: rgba(3, 107, 60, 0.5); z-index:100; }
+	   #layerswitcher{text-align: left; color: white;}
 	#Phoenix {
 	color: 	#004C2E; 
 	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
@@ -41,9 +36,6 @@
 	cursor: pointer;
 	text-decoration: underline;
 	}
-	h1 {
-	font-family: Tahoma, Geneva, sans-serif;
-	}
 		
     </style>
     <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
@@ -54,7 +46,7 @@
     <title>City Sustainability</title>
   </head>
   <body>
-    <h2>City Sustainability Initiatives</h2>
+    <h1>Phoenix Metro Sustainability Initiatives</h1>
 	<div class="container">
 	<div id="Explore" class="explore"></div>
     <div id="map" class="map"></div>
@@ -69,15 +61,13 @@
 <div id="Mesa">MESA</div>
 <div id="Tempe">TEMPE</div>
 
-<div id="toolbox2">Click on a city to learn about sustainability</div>
-
-<div id="toolbox">
-<ul id ="layerswitcher">
-<li><label><input type="checkbox" id="visible" checked> See all</label></li>
-<li><h1>Quick View by City</h1></li>
+<div id="toolbox2"><h3>Click on a city <br>to see sustainability efforts</h3>
+<ul type="none" id ="layerswitcher">
+<li><h3>Quick View by City</h3></li>
 <li><label><input type="checkbox" id="visible1" checked> Mesa</label></li>
 <li><label><input type="checkbox" id="visible2" checked> Tempe</label></li>
 <li><label><input type="checkbox" id="visible3" checked> Phoenix</label></li>
+<li><label><input type="checkbox" id="visible" checked> See all</label></li>
 </ul>
 </div>	
     <script type="text/javascript">
@@ -184,7 +174,7 @@ var efforts = new ol.layer.Vector({
 		}),
 			style: new ol.style.Style({
 				stroke: new ol.style.Stroke({color: 'black', width: 3}),
-				fill: new ol.style.Fill({color:'rgba(5,249,221,0.7)'})
+				fill: new ol.style.Fill({color:'rgba(177,228,250,0.7)'})
 			}),
 		});
 		var Mesa = new ol.layer.Vector({

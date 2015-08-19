@@ -3,6 +3,6 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
                                                                                 
 "features": [
-{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Infrastructure", "Location": "Main St. Downtown Mesa", "Latitude": 33.413009, "Longitude": -111.825738, "Building": "Low Impact Development Demo Site", "URL_1": "<a href =\"http:\/\/wateruseitwisely.com\/cutting-curb-beneficial-use-stormwater\/\">Learn more<\/a>", "Info": "Green Infrastructure", "Describe": "Low impact development demonstration site created to investigate potential benefits." }, "geometry": { "type": "Point", "coordinates": [ -12448384.211742023, 3950253.1905803732 ] } }
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Infrastructure", "Location": "Main St. Downtown Mesa", "Latitude": 33.413009, "Longitude": -111.825738, "Building": "Low Impact Development Demo Site", "URL_1": "<a href =\"http:\/\/wateruseitwisely.com\/cutting-curb-beneficial-use-stormwater\/\">Learn more<\/a>", "Info": "Green Infrastructure", "Describe": "Low Impact Development (LID) demonstration site created to provide an example of the benefits of green infrastructure." }, "geometry": { "type": "Point", "coordinates": [ -12448384.211742023, 3950253.1905803732 ] } }
 ]
 }

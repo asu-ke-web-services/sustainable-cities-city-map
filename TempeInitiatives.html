@@ -54,13 +54,13 @@
 	  .ol-popup-content {
 		font-family: Tahoma, Geneva, sans-serif;
 		font-weight: bold;
-		color: #6BB26B;
+		color:  #33CCFF;
 		font-size: 14px;
 		}
 		.ol-popup-closer {
         text-decoration: none;
         position: absolute;
-		color: 'black';
+		color: #33CCFF;
         top: 2px;
         right: 6px;
       }
@@ -68,18 +68,30 @@
 		content: "x";
 		}
 	   #toolbox2       
-	   { position:absolute; top:500px; right:400px; padding:5px; border-radius:4px; border-style: double; color:#fff; background: rgba(66, 207, 112, 0.4); z-index:100; }
-	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
-	   
+	   { position:absolute; top:85px; right:50px; padding:5px; line-height: .02; border-radius:4px; color:#fff; border-style: double; background: rgba(3, 107, 60, 1.0); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
+	   	   h4 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   color: #33CCFF;	font-size: 14px;
+	   }
 	   	   #toolbox3       
-	   { position:absolute; top:150px; left:200px; padding:5px; border-radius:4px; border-style: double; color:black; background: rgba(243, 247, 131, 0.7); z-index:100; }
+	   { position:absolute; top:120px; line-height: .75;font-size: 16px; font-family: Tahoma, Geneva, sans-serif; line-height: 2.0; left:100px; padding:5px; border-radius:4px; border-style: none; color: black; background: rgba(250, 245, 245, 1.0); z-index:100; }
 	   
 	   p {
 	   font-family: Tahoma, Geneva, sans-serif;
-	   font-size: 18px;
+	   font-size: 18px;	   color: #33CCFF;
+	   }
+	   	   p1 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   font-size: 18px;	   color: blue;
 	   }
 	   h1 {
 	   font-family: Tahoma, Geneva, sans-serif;
+	   color: #33CCFF;
+	   }
+	   	   	   li {
+	   font-family: Tahoma, Geneva, sans-serif;
+font-size: 14px;
 	   }
 	  #Tempe {
 	color: 	#004C2E;
@@ -87,6 +99,14 @@
 	font-size: 24px;
 	font-weight: bold;
 	}
+	#columns{
+	    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
+}
 	   
     </style>
     <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
@@ -107,28 +127,24 @@
       </div>
   	</div>
 	
-<div id="toolbox2">	
+<div id="toolbox2">
 <ul id ="layerswitcher">
-<li><h2>  </li></h2>
-<li><h3> Energy </li></h3>
-<li><label><input type="checkbox" id="visible" checked> Solar </label></li>
-<li><h3> Infrastructure </li></h3>
-<li><label><input type="checkbox" id="visible1" checked> Green Building </label></li>
-<li><h3> Waste Recycling </li></h3>
-<li><label><input type="checkbox" id="visible3" checked> Compost </label></li>
-<li><label><input type="checkbox" id="visible2" checked> Biofuel </label></li>
-<li><h3> Transportation </li></h3>
-<li><label><input type="checkbox" id="visible5" checked> Street Car </label></li>
-<li><h3> Urban Farming/Forestry </li></h3>
-<li><label><input type="checkbox" id="visible4" checked> Urban Farm </label></li>
+<h4><a href="TempeDocuments.html"style="color: white">Clicke here to view plans/reports</a></h4><br>
+<li><h4>Energy</h4><br><label><img src="Sun.png"/> Solar<input type="checkbox" id="visible" checked></label></li><br>
+<li><h4>Infrastructure</h4><br><label><img src="Building1.png"style="width:30px;height:50px"/> Green Building <input type="checkbox" id="visible1" checked></label>
+<li><h4> Transportation</h4> <label><img src="Ext.png"style="width:30px;height:20px"/> Street Car <input type="checkbox" id="visible5" checked> </label></li>
+</li><li><h4>  Urban Farming/Forestry</h4><label><img src="Sunflower.png" style="width:40px;height:45px"/> Urban Farm <input type="checkbox" id="visible4" checked> </label></li>
+<li><h4> Urban Renewal </li></h4><br>
+<li>None yet</li>
+<li><h4>Waste Recycling</h4><label><img src="CompostIcon.png"style="width:25px;height:40px"/> Compost <input type="checkbox" id="visible3" checked> </label></li>
+<li><label><img src="Biofuel.png"style="width:50px;height:50px"/> Biofuel <input type="checkbox" id="visible2" checked></label></li>
 </ul>
+</div>
 </div>
 
 <div id="toolbox3">	
-<h1>Tempe</h1>
-<p>Unique sustainability effort: Compost facility </p>
-<p>Number of sustainability initiatives: 11</p>
-<a href="http://www.tempe.gov/city-hall/public-works/sustainable-tempe"><p>Visit Tempe's sustainability webpage</p></a>
+City of Tempe<br>
+<a href="http://www.tempe.gov/city-hall/public-works/sustainable-tempe" style="color: blue">Visit Tempe's sustainability webpage</a>
 </div>
 
     <script type="text/javascript">
@@ -153,13 +169,23 @@
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
-	        anchor: [0.5, 19.0],
-            anchorXUnits: 'fraction',
+	        anchor: [30, 52],
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'Sun.png',
 
 	})
 	})
+	});
+	
+	var LightRail = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'LightRailLine.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'black', width: 1}),
+			fill: new ol.style.Fill({color:'yellow'})
+		}),
 	});
 	
 	var UrbanFarm = new ol.layer.Vector({
@@ -168,10 +194,10 @@
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
-	        anchor: [0.4, 50],
-            anchorXUnits: 'fraction',
+	        anchor: [30, 50],
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Garden.png'
+            src: 'Sunflower.png'
 	})
 	})
 	});
@@ -182,8 +208,8 @@
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
-	        anchor: [0.45, 14.8],
-            anchorXUnits: 'fraction',
+	        anchor: [30, 52],
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'CompostIcon.png',
 	})
@@ -196,10 +222,10 @@
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
-	        anchor: [0.45, 15],
-            anchorXUnits: 'fraction',
+	        anchor: [30, 52],
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Building.png'
+            src: 'Building1.png'
 	})
 	})
 	});
@@ -210,8 +236,8 @@
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
-	        anchor: [0.55, 22],
-            anchorXUnits: 'fraction',
+	        anchor: [30, 52],
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'Biofuel.png'
 	})
@@ -235,27 +261,10 @@
 		}),
 		
 		style: new ol.style.Style({
-			stroke: new ol.style.Stroke({color: 'blue', width: 1}),
+			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
 			fill: new ol.style.Fill({color:'yellow'})
 		}),
 	});
-	
-		var TempeEfforts = new ol.layer.Vector({
-		source: new ol.source.GeoJSON({
-			url:'TempeEfforts.geojson'
-		}),
-		style: new ol.style.Style({
-		image: new ol.style.Circle({
-				radius: 9,
-				fill: new ol.style.Fill({
-				color: '#00CC7A'
-				}),
-				stroke: new ol.style.Stroke({
-					color: 'black',
-					width: 2})
-		})
-		})
-		});
 		
       var map = new ol.Map({
         target: 'map',
@@ -271,13 +280,13 @@
 			source: new ol.source.Stamen({layer: 'terrain-lines'})
 		  }),
 	Tempe,
-	TempeEfforts,
+	LightRail,
+	TempeCar,
 	TempeSolar,
 	TempeGB,
-	TempeBiofuel,
 	TempeCompost,
-	UrbanFarm,
-	TempeCar
+	TempeBiofuel,
+	UrbanFarm
         ],
 		overlays: [overlay],
         view: new ol.View({
@@ -317,7 +326,11 @@ map.on('click', function(evt) {
       function(feature, layer) {
         return feature;
 	}, null, function(layer) {
-  return layer === TempeEfforts;
+  if(layer !==Tempe){
+	return true;
+	}
+	return false;
+
 });
 
   var coordinate = evt.coordinate;
@@ -329,7 +342,7 @@ map.on('click', function(evt) {
     if ( feature ) { 
     // if you clicked on a feature
     // console.log(feature.getProperties());
-    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + feature.getProperties().Building + '</p>'+ '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().Info + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
+    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + '<p>' + feature.getProperties().Building + '</p>'+ '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
     container.style.display = 'block'; // actually show the container 
   } else {
     // we did not click on a feature, so hide the container 

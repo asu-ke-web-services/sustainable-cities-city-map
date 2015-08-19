@@ -48,14 +48,14 @@
         text-decoration: none;
         position: absolute;
         top: 2px;
-		color: #70DB70;
-        right: 8px;
+		color: #33CCFF;
+        right: 12px;
       }
 	  .ol-popup-content {
 		font-family: Tahoma, Geneva, sans-serif;
 		font-weight: bold;
 		color: #6BB26B;
-		font-size: 14px;
+		font-size: 12px;
 		}
 		.ol-popup-closer {
         text-decoration: none;
@@ -67,17 +67,27 @@
 		.ol-popup-closer:after {
 		content: "x";
 		}
+		
 	   #toolbox2       
-	   { position:absolute; top:550px; right:400px; padding:5px; border-radius:4px; border-style: double; color:#fff; background: rgba(66, 207, 112, 0.4); z-index:100; }
-	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
+	   { position:absolute; top:85px; right:50px; padding:5px; line-height: 0.02; border-radius:4px; color:#fff; border-style: double; background: rgba(3, 107, 60, 1.0); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
 	   #toolbox3       
-	   { position:absolute; top:150px; left:200px; padding:5px; border-radius:4px; border-style: double; color:black; background: rgba(243, 247, 131, 0.7); z-index:100; }
+	   { position:absolute; font-size: 16px; font-family: Tahoma, Geneva, sans-serif;  line-height: 2.0;top:100px; left:95px; padding:5px; color:black; background: rgba(250, 245, 245, 1.0); z-index:100; }
+	   	   	   h4 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   color: #33CCFF;	font-size: 14px;
+	   }
+	   
+	li {
+	   font-family: Tahoma, Geneva, sans-serif;
+font-size: 14px;
+	   }
 	   p {
 	   font-family: Tahoma, Geneva, sans-serif;
-	   font-size: 18px;
+	   font-size: 18px;color: #33CCFF;
 	   }
 	   h1 {
-	   font-family: Tahoma, Geneva, sans-serif;
+	   font-family: Tahoma, Geneva, sans-serif;	   color: #33CCFF;
 	   }
 	   	#Mesa {
 	color: 	#004C2E;
@@ -85,6 +95,7 @@
 	font-size: 20px;
 	font-weight: bold;
 	}
+	
     </style>
     <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
 	<script src="v3.1.1/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
@@ -105,24 +116,27 @@
   	</div>
 <div id="toolbox2">	
 <ul id ="layerswitcher">
-<li><h3> Energy </li></h3>
-<li><label><input type="checkbox" id="visible" checked> Solar</label></li>
-<li><h3> Waste Recycling </li></h3>
-<li><label><input type="checkbox" id="visible1" checked> Biofuel</label></li>
-<li><h3> Infrastructure </li></h3>
-<li><label><input type="checkbox" id="visible2" checked> Green Building</label></li>
-<li><label><input type="checkbox" id="visible3" checked> Low Impact Development Site</label></li>
-<li><h3> Urban Farming/Forestry </li></h3>
-<li><label><input type="checkbox" id="visible4" checked> Urban Garden</label></li>
+<h4><a href="Documents.html"style="color: white">View Plans/Reports</a></h4>
+<li><h4> Energy </li></h4>
+<li><label><img src="Sun.png"/> Solar<input type="checkbox" id="visible" checked> </label></li>
+<li><h4> Infrastructure </li></h4>
+<li><label><img src="Building1.png"/> Green Building<input type="checkbox" id="visible2" checked> </label></li>
+<li><label><img src="LotIcon.png"/> Low Impact Development Site<input type="checkbox" id="visible3" checked> </label></li>
+<li><h4> Transportation </li></h4>
+<li><label><img src="Ext.png"style="width:30px;height:20px"/> Light Rail Extension<input type="checkbox" id="visible3" checked> </label></li>
+<li><h4> Urban Farming/Forestry </li></h4>
+<li><label><img src="Sunflower.png"/> Urban Garden<input type="checkbox" id="visible4" checked> </label></li>
+<li><h4> Urban Renewal </li></h4>
+<li> None yet </li>
+<li><h4> Waste Recycling </li></h4>
+<li><label><img src="Biofuel.png"/> Biofuel<input type="checkbox" id="visible1" checked> </label></li>
 </ul>
 </div>
 <div id="toolbox3">	
-<h1>Mesa</h1>
-<p>Unique sustainability effort: Low Impact Development Demo Site </p>
-<p>Number of sustainability initiatives: 12</p>
-<a href="http://www.mesaaz.gov/sustainability/"><p>Visit Mesa's sustainability webpage</p></a>
+City of Mesa<br>
+<a href="http://www.mesaaz.gov/sustainability/">Visit Mesa's sustainability webpage</a>
 </div>
-    <script type="text/javascript">
+<script type="text/javascript">
 	
 	var container = document.getElementById('popup');
     var content   = document.getElementById('popup-content');
@@ -145,11 +159,30 @@
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.50, 17.0],
-            anchorXUnits: 'fraction',
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'Sun.png'
 	})
 	})
+	});
+		var LightRail = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'LightRailLine.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'black', width: 1}),
+			fill: new ol.style.Fill({color:'yellow'})
+		}),
+	});
+			
+	var LightRailExt = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'LightRailExt.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
+			fill: new ol.style.Fill({color:'yellow'})
+		}),
 	});
 	
 		var MesaUG = new ol.layer.Vector({
@@ -159,21 +192,21 @@
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.4, 50],
-            anchorXUnits: 'fraction',
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Garden.png'
+            src: 'Sunflower.png'
 	})
 	})
 	});
 	
 	var MesaBiofuel = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaBiofuel.geojson'
+		url: 'MesaBioFuel.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.4, 24],
-            anchorXUnits: 'fraction',
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'Biofuel.png'
 	})
@@ -187,9 +220,9 @@
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.3, 15],
-            anchorXUnits: 'fraction',
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Building.png'
+            src: 'Building1.png'
 	})
 	})
 	});
@@ -201,7 +234,7 @@
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.45, 14.8],
-            anchorXUnits: 'fraction',
+            anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
             src: 'LotIcon.png',
 	})
@@ -216,23 +249,6 @@
 		style: new ol.style.Style({
 		stroke: new ol.style.Stroke({color: 'black', width: 3}),
 		fill: new ol.style.Fill({color:'rgba(21,133,38,.7)'})
-		})
-		});
-		
-				var MesaEfforts = new ol.layer.Vector({
-		source: new ol.source.GeoJSON({
-			url:'MesaEfforts.geojson'
-		}),
-		style: new ol.style.Style({
-		image: new ol.style.Circle({
-				radius: 9,
-				fill: new ol.style.Fill({
-				color: '#00CC7A'
-				}),
-				stroke: new ol.style.Stroke({
-					color: 'black',
-					width: 2})
-		})
 		})
 		});
 	
@@ -250,7 +266,8 @@
 			source: new ol.source.Stamen({layer: 'terrain-lines'})
 		  }),
 	Mesa, 
-	MesaEfforts,
+	LightRail,
+	LightRailExt,
 	MesaSolar,
 	MesaBiofuel,
 	MesaGB,
@@ -260,7 +277,7 @@
 		overlays: [overlay],
         view: new ol.View({
           center:[-12438182,3949982],
-          zoom: 11
+          zoom: 11.5
         })
       });
 	  
@@ -287,12 +304,15 @@ var msa = new ol.Overlay({
 });
 map.addOverlay(msa);
 	  
-	  	  map.on('click', function(evt) {
+	  map.on('click', function(evt) {
   var feature = map.forEachFeatureAtPixel(evt.pixel,
       function(feature, layer) {
         return feature;
 	}, null, function(layer) {
-  return layer === MesaEfforts;
+  if(layer !==Mesa){
+	return true;
+	}
+	return false;
 });
 
   var coordinate = evt.coordinate;
@@ -304,8 +324,8 @@ map.addOverlay(msa);
     if ( feature ) { 
     // if you clicked on a feature
     // console.log(feature.getProperties());
-    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>' + '<p>' + feature.getProperties().Building + '</p>' + '<p>' + feature.getProperties().Info + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
-    container.style.display = 'block'; // actually show the container 
+    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + '<p>' + feature.getProperties().Building + '</p>'+ '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
+    container.style.display = 'block';// actually show the container 
   } else {
     // we did not click on a feature, so hide the container 
     content.innerHTML = '';
@@ -313,7 +333,7 @@ map.addOverlay(msa);
     closer.blur();
   }
 
-});
+}); 
 	
 	var zoomslider = new ol.control.ZoomSlider({});
 	map.addControl(zoomslider);
