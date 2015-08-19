@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Biofuel", "Location": "Fire Station 204 1426 South Extension Road Mesa, AZ 85210", "Latitude": 33.389479, "Longitude": -111.849175, "Building": "Fire Station No. 204", "URL_1": "<a href =\"http:\/\/apps.mesaaz.gov\/news\/ArticleView.aspx?id=44736\">See more<\/a>", "Info": "Used cooking oil recycling", "Describe": "Fryer oil collection location" }, "geometry": { "type": "Point", "coordinates": [ -12450993.206647744, 3947115.6307102982 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Biofuel", "Location": "Fire Station 205 730 S Greenfield Rd Mesa, AZ 85206", "Latitude": 33.401986, "Longitude": -111.736892, "Building": "Fire Station No. 205", "URL_1": "<a href =\"http:\/\/apps.mesaaz.gov\/news\/ArticleView.aspx?id=44736\">See more<\/a>", "Info": "Used cooking oil recycling", "Describe": "Fryer oil collection location" }, "geometry": { "type": "Point", "coordinates": [ -12438493.920263004, 3948783.2453356301 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Biofuel", "Location": "Fire Station 212 2430 S Ellsworth Rd Mesa, AZ 85209", "Latitude": 33.371542, "Longitude": -111.639624, "Building": "Fire Station No. 212", "URL_1": "<a href =\"http:\/\/apps.mesaaz.gov\/news\/ArticleView.aspx?id=44736\">See more<\/a>", "Info": "Used cooking oil recycling", "Describe": "Fryer oil collection location" }, "geometry": { "type": "Point", "coordinates": [ -12427666.084900575, 3944724.4817827777 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Biofuel", "Location": "Fire Station 214 5950 E Virginia St. Mesa, AZ 85215", "Latitude": 33.477226, "Longitude": -111.701800, "Building": "Fire Station 214", "URL_1": "<a href =\"http:\/\/apps.mesaaz.gov\/news\/ArticleView.aspx?id=44736\">See more<\/a>", "Info": "Used cooking oil recycling", "Describe": "Fry oil collection location" }, "geometry": { "type": "Point", "coordinates": [ -12434587.518955983, 3958820.4046198344 ] } }
+]
+}

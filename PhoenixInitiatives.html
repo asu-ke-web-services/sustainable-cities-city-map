@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+    <link rel="stylesheet" <link rel="stylesheet" href="v3.1.1/v3.1.1/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 100%;
+        width: 100%;
+      }
+	  		.ol-popup {
+		width: 300px;
+        display: none;
+        position: absolute;
+        background-color: white;
+		opacity: 1.0;
+        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+		color: #70DB70;
+        right: 8px;
+      }
+	  .ol-popup-content {
+		font-family: Tahoma, Geneva, sans-serif;
+		font-weight: bold;
+		color: #6BB26B;
+		font-size: 14px;
+		}
+		.ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+		color: 'black';
+        top: 2px;
+        right: 6px;
+      }
+		.ol-popup-closer:after {
+		content: "x";
+		}
+	   #toolbox       
+	   { position:absolute; top:550px; right:650px; padding:5px; border-radius:4px; color:#fff; border-style: double; background: rgba(66, 207, 112, 0.4); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
+	   
+	   #toolbox3       
+	   { position:absolute; top:100px; left:150px; padding:5px; border-radius:4px; border-style: double; color:black; background: rgba(243, 247, 131, 0.7); z-index:100; }
+	   
+	   p {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   font-size: 18px;
+	   }
+	   h1 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   }
+	   #Phoenix {
+	color: 	#004C2E; 
+	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	}
+    </style>
+    <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
+    <title></title>
+  </head>
+  <body>
+  <div id="Phoenix">PHOENIX</div>
+    <div id="map" class="map"></div>
+		<div class="container">
+		        <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content" class="ol-popup-content"></div>
+        </div>
+      </div>
+  	</div>
+	
+<div id="toolbox">	
+<ul id ="layerswitcher">
+<li><h3> Energy </li></h3>
+<li><label><input type="checkbox" id="visible" checked> Solar </label></li>
+<li><h3> Infrastructure </li></h3>
+<li><label><input type="checkbox" id="visible1" checked> Green Building </label></li>
+<li><h3> Transportation </li></h3>
+<li><label><input type="checkbox" id="visible2" checked> Bikeshare </label></li>
+<li><h3> Urban Development </li></h3>
+<li><label><input type="checkbox" id="visible3" checked> Vacant Lot Revitalization </label></li>
+<li><label><input type="checkbox" id="visible4" checked> Sustainably Planned Park </label></li>
+</ul>
+</div>
+<div id="toolbox3">	
+<h1>Phoenix</h1>
+<p>Unique sustainability effort: Bikeshare</p>
+<p>Number of sustainability initiatives: 58</p>
+<a href="https://www.phoenix.gov/sustainability"><p>Visit the City of Phoenix sustainability webpage</p></a>
+</div>
+    <script type="text/javascript">
+		var container = document.getElementById('popup');
+    var content   = document.getElementById('popup-content');
+    var closer    = document.getElementById('popup-closer');
+	
+	closer.onclick = function() {
+      container.style.display = 'none';
+      closer.blur();
+      return false;
+    };
+	
+	var overlay = new ol.Overlay({
+      element: container
+    });
+	
+		var PhoenixSolar = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixSolar.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.50, 18.5],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Sun.png',
+	})
+	})
+	});
+	
+			var PhoenixVacant = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixVacant.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.45, 14.8],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'LotIcon.png',
+	})
+	})
+	});
+	
+	var PhoenixBikeshare = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixBikeshare.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Circle({
+		radius: 4,
+		fill: new ol.style.Fill({
+		color: 'white'
+		})
+	})
+	})
+	});
+	
+	var B = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'BikeShareLines.geojson'
+	}),
+		style: new ol.style.Style({
+			stroke: new ol.style.Stroke({color: 'blue', width: 1}),
+			fill: new ol.style.Fill({color:'green'})
+		}),
+	});
+	
+	var PhoenixGB = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixGB.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.3, 15],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Building.png'
+	})
+	})
+	});
+	
+	
+	var PhoenixGP = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'PhoenixGP.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.3, 15],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Tree.png'
+	})
+	})
+	});
+
+	  var Phoenix = new ol.layer.Vector({
+		source: new ol.source.GeoJSON({
+			projection: 'EPSG:3857',
+			url: 'Phoenix3857.geojson' 
+		}),
+		style: new ol.style.Style({
+		stroke: new ol.style.Stroke({color: 'black', width: 3}),
+		fill: new ol.style.Fill({color:'rgba(5,249,221,0.7)'})
+		}),
+		});
+	
+	var PhoenixEfforts = new ol.layer.Vector({
+		source: new ol.source.GeoJSON({
+			url:'PhoenixEfforts.geojson'
+		}),
+		style: new ol.style.Style({
+		image: new ol.style.Circle({
+				radius: 6,
+				fill: new ol.style.Fill({
+				color: '#00CC7A'
+				}),
+				stroke: new ol.style.Stroke({
+					color: 'black',
+					width: 1})
+		})
+		})
+		});
+		
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({layer: 'watercolor'})
+		  }),
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({ layer: 'terrain-background'}),
+			opacity: 0.8
+		  }),
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({layer: 'terrain-lines'})
+		  }),
+
+	Phoenix,
+	PhoenixEfforts,
+	B,
+	PhoenixBikeshare,
+	PhoenixSolar,
+	PhoenixGB,
+	PhoenixGP,
+	PhoenixVacant
+        ],
+		overlays: [overlay],
+        view: new ol.View({
+          center:[-12460053.00000, 3975855.00000],
+          zoom: 10.7
+        })
+      });
+	  
+var visible = new ol.dom.Input(document.getElementById('visible'));
+visible.bindTo('checked', PhoenixSolar, 'visible');
+
+var visible1 = new ol.dom.Input(document.getElementById('visible1'));
+visible1.bindTo('checked', PhoenixGB, 'visible');
+
+var visible2 = new ol.dom.Input(document.getElementById('visible2'));
+visible2.bindTo('checked', PhoenixBikeshare, 'visible');
+
+var visible3 = new ol.dom.Input(document.getElementById('visible3'));
+visible3.bindTo('checked', PhoenixVacant, 'visible');
+
+var visible4 = new ol.dom.Input(document.getElementById('visible4'));
+visible4.bindTo('checked', PhoenixGP, 'visible');
+
+var pos = [-12480420.00, 3980209.00];
+
+var phx = new ol.Overlay({
+  position: pos,
+  element: document.getElementById('Phoenix'),
+});
+map.addOverlay(phx);
+	  
+	  map.on('click', function(evt) {
+  var feature = map.forEachFeatureAtPixel(evt.pixel,
+      function(feature, layer) {
+        return feature;
+	}, null, function(layer) {
+  return layer === PhoenixEfforts;
+});
+
+  var coordinate = evt.coordinate;
+  var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+      coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+  overlay.setPosition( coordinate );
+  
+    if ( feature ) { 
+    // if you clicked on a feature
+    // console.log(feature.getProperties());
+    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>'+ '<p>' + feature.getProperties().Building + '</p>' + '<p>' + feature.getProperties().Location + '</p>' + '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().Info + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
+    container.style.display = 'block'; // actually show the container 
+  } else {
+    // we did not click on a feature, so hide the container 
+    content.innerHTML = '';
+    container.style.display = 'none';
+    closer.blur();
+  }
+
+}); 
+	 var zoomslider = new ol.control.ZoomSlider({});
+	map.addControl(zoomslider);
+    </script>
+  </body>
+</html>

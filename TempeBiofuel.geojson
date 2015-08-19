@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "City": "Tempe", "Initiative": "Biofuel", "Location": "1320 E University Dr. Tempe  AZ 85281", "Latitude": 33.422021, "Longitude": -111.918372, "Building": "Fryer oil collection location", "URL_1": "<a href =\"http:\/\/www.tempe.gov\/city-hall\/public-works\/household-products-collection-center-hpcc-\/don-t-trash-it-\">See more<\/a>", "Describe": "Fryer oil collection location" }, "geometry": { "type": "Point", "coordinates": [ -12458696.136924371, 3951455.1024500295 ] } }
+]
+}

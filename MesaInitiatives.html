@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" <link rel="stylesheet" href="v3.1.1/v3.1.1/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 100%;
+        width: 100%;
+      }
+	  		.ol-popup {
+		width: 300px;
+        display: none;
+        position: absolute;
+        background-color: white;
+		opacity: 1.0;
+        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+		color: #70DB70;
+        right: 8px;
+      }
+	  .ol-popup-content {
+		font-family: Tahoma, Geneva, sans-serif;
+		font-weight: bold;
+		color: #6BB26B;
+		font-size: 14px;
+		}
+		.ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+		color: 'black';
+        top: 2px;
+        right: 6px;
+      }
+		.ol-popup-closer:after {
+		content: "x";
+		}
+	   #toolbox2       
+	   { position:absolute; top:550px; right:400px; padding:5px; border-radius:4px; border-style: double; color:#fff; background: rgba(66, 207, 112, 0.4); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px; background:rgba(3, 107, 60, 0.5); list-style-type:none; }
+	   #toolbox3       
+	   { position:absolute; top:150px; left:200px; padding:5px; border-radius:4px; border-style: double; color:black; background: rgba(243, 247, 131, 0.7); z-index:100; }
+	   p {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   font-size: 18px;
+	   }
+	   h1 {
+	   font-family: Tahoma, Geneva, sans-serif;
+	   }
+	   	#Mesa {
+	color: 	#004C2E;
+	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	}
+    </style>
+    <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
+	<script src="v3.1.1/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
+    <title></title>
+  </head>
+  <body>
+  <div id="Mesa">Mesa</div>
+    <div id="map" class="map"></div>
+		<div class="container">
+		        <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content" class="ol-popup-content"></div>
+        </div>
+      </div>
+  	</div>
+<div id="toolbox2">	
+<ul id ="layerswitcher">
+<li><h3> Energy </li></h3>
+<li><label><input type="checkbox" id="visible" checked> Solar</label></li>
+<li><h3> Waste Recycling </li></h3>
+<li><label><input type="checkbox" id="visible1" checked> Biofuel</label></li>
+<li><h3> Infrastructure </li></h3>
+<li><label><input type="checkbox" id="visible2" checked> Green Building</label></li>
+<li><label><input type="checkbox" id="visible3" checked> Low Impact Development Site</label></li>
+<li><h3> Urban Farming/Forestry </li></h3>
+<li><label><input type="checkbox" id="visible4" checked> Urban Garden</label></li>
+</ul>
+</div>
+<div id="toolbox3">	
+<h1>Mesa</h1>
+<p>Unique sustainability effort: Low Impact Development Demo Site </p>
+<p>Number of sustainability initiatives: 12</p>
+<a href="http://www.mesaaz.gov/sustainability/"><p>Visit Mesa's sustainability webpage</p></a>
+</div>
+    <script type="text/javascript">
+	
+	var container = document.getElementById('popup');
+    var content   = document.getElementById('popup-content');
+    var closer    = document.getElementById('popup-closer');
+	
+	closer.onclick = function() {
+      container.style.display = 'none';
+      closer.blur();
+      return false;
+    };
+	
+	var overlay = new ol.Overlay({
+      element: container
+    });
+	
+	var MesaSolar = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'MesaSolar.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.50, 17.0],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Sun.png'
+	})
+	})
+	});
+	
+		var MesaUG = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'MesaUG.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.4, 50],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Garden.png'
+	})
+	})
+	});
+	
+	var MesaBiofuel = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'MesaBiofuel.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.4, 24],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Biofuel.png'
+	})
+	})
+	});
+	
+	var MesaGB = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'MesaGB.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.3, 15],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'Building.png'
+	})
+	})
+	});
+	
+		var MesaLI = new ol.layer.Vector({
+	source: new ol.source.GeoJSON({
+		url: 'MesaLI.geojson'
+	}),
+	style: new ol.style.Style({
+	image: new ol.style.Icon({
+	        anchor: [0.45, 14.8],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'LotIcon.png',
+	})
+	})
+	});
+
+	  var Mesa = new ol.layer.Vector({
+		source: new ol.source.GeoJSON({
+			projection: 'EPSG:3857',
+			url: 'Mesa3857.geojson' 
+		}),
+		style: new ol.style.Style({
+		stroke: new ol.style.Stroke({color: 'black', width: 3}),
+		fill: new ol.style.Fill({color:'rgba(21,133,38,.7)'})
+		})
+		});
+		
+				var MesaEfforts = new ol.layer.Vector({
+		source: new ol.source.GeoJSON({
+			url:'MesaEfforts.geojson'
+		}),
+		style: new ol.style.Style({
+		image: new ol.style.Circle({
+				radius: 9,
+				fill: new ol.style.Fill({
+				color: '#00CC7A'
+				}),
+				stroke: new ol.style.Stroke({
+					color: 'black',
+					width: 2})
+		})
+		})
+		});
+	
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({layer: 'watercolor'})
+		  }),
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({ layer: 'terrain-background'}),
+			opacity: 0.8
+		  }),
+		  new ol.layer.Tile({
+			source: new ol.source.Stamen({layer: 'terrain-lines'})
+		  }),
+	Mesa, 
+	MesaEfforts,
+	MesaSolar,
+	MesaBiofuel,
+	MesaGB,
+	MesaLI,
+	MesaUG
+        ],
+		overlays: [overlay],
+        view: new ol.View({
+          center:[-12438182,3949982],
+          zoom: 11
+        })
+      });
+	  
+var visible = new ol.dom.Input(document.getElementById('visible'));
+visible.bindTo('checked', MesaSolar, 'visible');
+
+var visible1 = new ol.dom.Input(document.getElementById('visible1'));
+visible1.bindTo('checked', MesaBiofuel, 'visible');
+
+var visible2 = new ol.dom.Input(document.getElementById('visible2'));
+visible2.bindTo('checked', MesaGB, 'visible');
+
+var visible3 = new ol.dom.Input(document.getElementById('visible3'));
+visible3.bindTo('checked', MesaLI, 'visible');
+
+var visible4 = new ol.dom.Input(document.getElementById('visible4'));
+visible4.bindTo('checked', MesaUG, 'visible');
+
+var pos1 = [-12446623,3951036];
+
+var msa = new ol.Overlay({
+  position: pos1,
+  element: document.getElementById('Mesa')
+});
+map.addOverlay(msa);
+	  
+	  	  map.on('click', function(evt) {
+  var feature = map.forEachFeatureAtPixel(evt.pixel,
+      function(feature, layer) {
+        return feature;
+	}, null, function(layer) {
+  return layer === MesaEfforts;
+});
+
+  var coordinate = evt.coordinate;
+  var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+      coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+  overlay.setPosition( coordinate );
+  
+    if ( feature ) { 
+    // if you clicked on a feature
+    // console.log(feature.getProperties());
+    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>' + '<p>' + feature.getProperties().Building + '</p>' + '<p>' + feature.getProperties().Info + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
+    container.style.display = 'block'; // actually show the container 
+  } else {
+    // we did not click on a feature, so hide the container 
+    content.innerHTML = '';
+    container.style.display = 'none';
+    closer.blur();
+  }
+
+});
+	
+	var zoomslider = new ol.control.ZoomSlider({});
+	map.addControl(zoomslider);
+	
+    </script>
+  </body>
+</html>

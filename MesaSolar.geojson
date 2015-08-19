@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Solar Power", "Location": "7550 E Adobe St  Mesa  AZ  85207", "Latitude": 33.432229, "Longitude": -111.667382, "Building": "Red Mountain Multigenerational Center", "URL_1": "http:\/\/www.mesaaz.gov\/sustainability\/solarday.aspx", "Info": "294 kW", "Describe": "This building provides recreation for people of all ages and 44% of it's own energy through solar power" }, "geometry": { "type": "Point", "coordinates": [ -12430756.102457963, 3952816.6730781863 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Solar Power", "Location": "2430 S. Ellsworth  Mesa  AZ 85208", "Latitude": 33.380139, "Longitude": -111.636601, "Building": "Fire Station No. 212", "URL_1": "http:\/\/www.mesaaz.gov\/sustainability\/solarday.aspx", "Info": "185 kW", "Describe": "Prospects set on 67% of building energy requirements to come from solar power" }, "geometry": { "type": "Point", "coordinates": [ -12427329.577211855, 3945870.4429431264 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Solar Power", "Location": "1010 W. Grove Ave  Mesa  AZ 85210", "Latitude": 33.390621, "Longitude": -111.853248, "Building": "Fiesta Police Station", "URL_1": "https:\/\/mysolarcity.com\/Share\/2acce137-abdb-40f7-97a2-e6ee2ff4ccbe#\/monitoring\/historical\/day", "Info": "272 kW", "Describe": "This police station is seeing a projected savings of 60% building energy use" }, "geometry": { "type": "Point", "coordinates": [ -12451446.610933745, 3947267.8887571124 ] } },
+{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Solar Power", "Location": "7745 E. Brown Road  Mesa  AZ 85207", "Latitude": 33.434844, "Longitude": -111.669463, "Building": "Red Mountain park", "URL_1": "http:\/\/www.mesaaz.gov\/sustainability\/pdf\/SolFocusProjectWeb.pdf", "Info": "70.5 kW", "Describe": "This Mesa solar installation concentrates the sun's power up to 650 times tradition solar cells via concentrated photo-voltaic structures and 10 dual axis trackers." }, "geometry": { "type": "Point", "coordinates": [ -12430987.758318303, 3953165.4946114058 ] } }
+]
+}

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "City": "Phoenix", "Initiative": "Vacant lot revitalization", "Location": "4141 N 3rd St. Phoenix  AZ  85012", "Latitude": 33.496394, "Longitude": -112.072573, "Building": "Vacant lot", "URL_1": "<a href =\"http:\/\/phxrenews.org\/locations\/indian-school\">More about this project<\/a>", "Info": "15 acres", "Describe": "A vacant lot turned into an open public 15 acre space to grow a garden, exercise with your pet, socialize, create art, and  more." }, "geometry": { "type": "Point", "coordinates": [ -12475861.758251982, 3961378.8448051699 ] } }
+]
+}

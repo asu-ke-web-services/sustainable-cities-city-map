@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "City": "Tempe", "Initiative": "Green Building", "Location": "311 W Guadalupe Rd, Tempe, AZ 85283", "Latitude": 33.363666, "Longitude": -111.943785, "Building": "Kyrene Utility Services", "URL_1": "<a href =\"http:\/\/www.usgbc.org\/projects\/city-tempe-kyrene-utility-services-bu\">Learn about sustainability at this utility building<\/a>", "Info": "Gold", "Describe": "Handles utiilty requests for the residents of Tempe." }, "geometry": { "type": "Point", "coordinates": [ -12461525.088011952, 3943674.5589323291 ] } },
+{ "type": "Feature", "properties": { "City": "Tempe", "Initiative": "Green Building", "Location": "2050 W. Rio Salado Parkway, Tempe, AZ 85281", "Latitude": 33.430143, "Longitude": -111.972274, "Building": "Bus Maintenance Facility", "URL_1": "<a href =\"http:\/\/www.valleymetro.org\/projects_and_planning\/project_detail\/city_of_tempe_east_valley_bus_operations_maintenance_facility\">Read more<\/a>", "Info": "Gold", "Describe": "The complex is home to 250 busses that are maintained and serviced at the location and is the nation's first gold certified transit maintenance facility." }, "geometry": { "type": "Point", "coordinates": [ -12464696.524644906, 3952538.423743051 ] } },
+{ "type": "Feature", "properties": { "City": "Tempe", "Initiative": "Green Building", "Location": "200 E 5th St. Tempe, AZ 85281", "Latitude": 33.425970, "Longitude": -111.935248, "Building": "Tempe Transportation Center", "URL_1": "<a href =\"http:\/\/www.usgbc.org\/projects\/tempe-transportation-center\">Learn more<\/a>", "Info": "Platinum", "Describe": "Providing transportation support and sustainable building design innovation" }, "geometry": { "type": "Point", "coordinates": [ -12460574.809178794, 3951981.8117531375 ] } }
+]
+}
