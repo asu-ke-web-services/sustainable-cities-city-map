@@ -5,8 +5,8 @@
     <link rel="stylesheet" <link rel="stylesheet" href="v3.1.1/v3.1.1/css/ol.css" type="text/css">
     <style>
       .map {
-        height: 100%;
-        width: 100%;
+        height: 950px;
+        width:900px;
       }
 	  		.ol-popup {
 		width: 300px;
@@ -67,12 +67,7 @@
 		.ol-popup-closer:after {
 		content: "x";
 		}
-		
-	   #toolbox2       
-	   { position:absolute; top:85px; right:50px; padding:5px; line-height: 0.02; border-radius:4px; color:#fff; border-style: double; background: rgba(3, 107, 60, 1.0); z-index:100; }
-	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
-	   #toolbox3       
-	   { position:absolute; font-size: 16px; font-family: Tahoma, Geneva, sans-serif;  line-height: 2.0;top:100px; left:95px; padding:5px; color:black; background: rgba(250, 245, 245, 1.0); z-index:100; }
+
 	   	   	   h4 {
 	   font-family: Tahoma, Geneva, sans-serif;
 	   color: #33CCFF;	font-size: 14px;
@@ -95,6 +90,9 @@ font-size: 14px;
 	font-size: 20px;
 	font-weight: bold;
 	}
+	   #toolbox2       
+	   { position:absolute; top:345px; left:10px; padding:5px; line-height: 0.02; border-radius:4px; color:black; border-style: double; background: rgba(250, 251, 252, 1.0); z-index:100; }
+	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
 	
     </style>
     <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
@@ -114,27 +112,26 @@ font-size: 14px;
         </div>
       </div>
   	</div>
-<div id="toolbox2">	
+	
+	<div id="toolbox2">	
 <ul id ="layerswitcher">
-<h4><a href="Documents.html"style="color: white">View Plans/Reports</a></h4>
+<h3 style="color:black">City of Mesa</h3><br>
+<h4><a href="http://www.mesaaz.gov/sustainability/" style="color: black">Visit Mesa's sustainability webpage</a></h4>
+<h4><a href="MesaDocuments.html"style="color: black">Click here to view Plans/Reports</a></h4><br>
 <li><h4> Energy </li></h4>
-<li><label><img src="Sun.png"/> Solar<input type="checkbox" id="visible" checked> </label></li>
+<li><label><img src="Icons/Sun.png"/> Solar<input type="checkbox" id="visible" checked> </label></li>
 <li><h4> Infrastructure </li></h4>
-<li><label><img src="Building1.png"/> Green Building<input type="checkbox" id="visible2" checked> </label></li>
-<li><label><img src="LotIcon.png"/> Low Impact Development Site<input type="checkbox" id="visible3" checked> </label></li>
+<li><label><img src="Icons/Building1.png"/> Green Building<input type="checkbox" id="visible2" checked> </label></li>
+<li><label><img src="Icons/LotIcon.png"/> Low Impact Development Site<input type="checkbox" id="visible3" checked> </label></li>
 <li><h4> Transportation </li></h4>
-<li><label><img src="Ext.png"style="width:30px;height:20px"/> Light Rail Extension<input type="checkbox" id="visible3" checked> </label></li>
+<li><label><img src="Icons/Ext.png"style="width:30px;height:20px"/> Light Rail Extension<input type="checkbox" id="visible3" checked> </label></li>
 <li><h4> Urban Farming/Forestry </li></h4>
-<li><label><img src="Sunflower.png"/> Urban Garden<input type="checkbox" id="visible4" checked> </label></li>
+<li><label><img src="Icons/Sunflower.png"/> Urban Garden<input type="checkbox" id="visible4" checked> </label></li>
 <li><h4> Urban Renewal </li></h4>
 <li> None yet </li>
 <li><h4> Waste Recycling </li></h4>
-<li><label><img src="Biofuel.png"/> Biofuel<input type="checkbox" id="visible1" checked> </label></li>
+<li><label><img src="Icons/Biofuel.png"/> Biofuel<input type="checkbox" id="visible1" checked> </label></li>
 </ul>
-</div>
-<div id="toolbox3">	
-City of Mesa<br>
-<a href="http://www.mesaaz.gov/sustainability/">Visit Mesa's sustainability webpage</a>
 </div>
 <script type="text/javascript">
 	
@@ -154,20 +151,20 @@ City of Mesa<br>
 	
 	var MesaSolar = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaSolar.geojson'
+		url: 'GeoJSON/MesaSolar.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.50, 17.0],
             anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Sun.png'
+            src: 'Icons/Sun.png'
 	})
 	})
 	});
 		var LightRail = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'LightRailLine.geojson'
+		url: 'GeoJSON/LightRailLine.geojson'
 	}),
 		style: new ol.style.Style({
 			stroke: new ol.style.Stroke({color: 'black', width: 1}),
@@ -177,7 +174,7 @@ City of Mesa<br>
 			
 	var LightRailExt = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'LightRailExt.geojson'
+		url: 'GeoJSON/LightRailExt.geojson'
 	}),
 		style: new ol.style.Style({
 			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
@@ -187,56 +184,56 @@ City of Mesa<br>
 	
 		var MesaUG = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaUG.geojson'
+		url: 'GeoJSON/MesaUG.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.4, 50],
             anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Sunflower.png'
+            src: 'Icons/Sunflower.png'
 	})
 	})
 	});
 	
 	var MesaBiofuel = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaBioFuel.geojson'
+		url: 'GeoJSON/MesaBioFuel.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.4, 24],
             anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Biofuel.png'
+            src: 'Icons/Biofuel.png'
 	})
 	})
 	});
 	
 	var MesaGB = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaGB.geojson'
+		url: 'GeoJSON/MesaGB.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.3, 15],
             anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'Building1.png'
+            src: 'Icons/Building1.png'
 	})
 	})
 	});
 	
 		var MesaLI = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'MesaLI.geojson'
+		url: 'GeoJSON/MesaLI.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.45, 14.8],
             anchorXUnits: 'pixels',
             anchorYUnits: 'pixels',
-            src: 'LotIcon.png',
+            src: 'Icons/LotIcon.png',
 	})
 	})
 	});
@@ -244,7 +241,7 @@ City of Mesa<br>
 	  var Mesa = new ol.layer.Vector({
 		source: new ol.source.GeoJSON({
 			projection: 'EPSG:3857',
-			url: 'Mesa3857.geojson' 
+			url: 'GeoJSON/Mesa3857.geojson' 
 		}),
 		style: new ol.style.Style({
 		stroke: new ol.style.Stroke({color: 'black', width: 3}),
@@ -276,8 +273,8 @@ City of Mesa<br>
         ],
 		overlays: [overlay],
         view: new ol.View({
-          center:[-12438182,3949982],
-          zoom: 11.5
+          center:[-12446000,3943000],
+          zoom: 11.25
         })
       });
 	  
@@ -296,7 +293,7 @@ visible3.bindTo('checked', MesaLI, 'visible');
 var visible4 = new ol.dom.Input(document.getElementById('visible4'));
 visible4.bindTo('checked', MesaUG, 'visible');
 
-var pos1 = [-12446623,3951036];
+var pos1 = [-12445023,3951036];
 
 var msa = new ol.Overlay({
   position: pos1,

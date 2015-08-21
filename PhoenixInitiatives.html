@@ -5,8 +5,8 @@
     <link rel="stylesheet" <link rel="stylesheet" href="v3.1.1/v3.1.1/css/ol.css" type="text/css">
     <style>
       .map {
-        height: 600px;
-        width: 660px;
+        height: 950px;
+        width: 900px;
       }
 	  		.ol-popup {
 		width: 300px;
@@ -68,11 +68,8 @@
 		content: "x";
 		}
 	   #toolbox       
-	   { position:absolute; top:85px; right:50px; padding:5px; line-height: 0.02; border-radius:4px; color:#fff; border-style: double; background: rgba(3, 107, 60, 1.0); z-index:100; }
+	   { position:absolute; top:350px; left:10px; padding:5px; line-height: 0.02; border-radius:4px; color:black; border-style: double; background: rgba(245, 250, 250, 1.0); z-index:100; }
 	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
-	   
-	   #toolbox3       
-	   { position:absolute; font-size: 16px; font-family: Tahoma, Geneva, sans-serif;  line-height: 2.0;top:100px; left:95px; padding:5px; color:black; background: rgba(250, 245, 245, 1.0); z-index:100; }
 	   
 	   p {
 	   font-family: Tahoma, Geneva, sans-serif;
@@ -97,7 +94,7 @@ font-size: 14px;
 	   #Phoenix {
 	color: 	#004C2E; 
 	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
-	font-size: 20px;
+	font-size: 12px;
 	font-weight: bold;
 	}
 		#columns{
@@ -129,30 +126,27 @@ font-size: 14px;
 	
 <div id="toolbox">	
 <ul id ="layerswitcher">
-<h4><a href="PhoenixDocuments.html"style="color: white">Click here to view plans/reports</a></h4><br>
+<h3 style="color: black">City of Phoenix</h3><br>
+<h4><a href="https://www.phoenix.gov/sustainability" style="color: black">Visit the city's sustainability webpage</a></h4>
+<h4><a href="PhoenixDocuments.html"style="color: black">Click here to view plans/reports</a></h4><br>
 <li><h4> Energy </li></h4>
-<li><label><img src="Sun.png"/> Solar<input type="checkbox" id="visible" checked></label></li>
+<li><label><img src="Icons/Sun.png"/> Solar<input type="checkbox" id="visible" checked></label></li>
 <li><h4> Infrastructure </li></h4>
-<li><label><img src="Building1.png"style="width:30px;height:50px"/> Green Building<input type="checkbox" id="visible1" checked> </label></li>
-<li><label><img src="tree.png"style="width:35px;height:45px"/> Green Infrastructure <input type="checkbox" id="visible4" checked> </label>
+<li><label><img src="Icons/Building1.png"style="width:30px;height:50px"/> Green Building<input type="checkbox" id="visible1" checked> </label></li>
+<li><label><img src="Icons/tree.png"style="width:35px;height:45px"/> Green Infrastructure <input type="checkbox" id="visible4" checked> </label>
 <li><h4> Transportation </li></h4>
-<li><label><img src="Bicycle.png"style="width:50px;height:35px"/> Bikeshare <input type="checkbox" id="visible2" checked> </label></li>
+<li><label><img src="Icons/Bicycle.png"style="width:50px;height:35px"/> Bikeshare <input type="checkbox" id="visible2" checked> </label></li>
 <h4></h4>
-<li><label><img src="Ext.png"style="width:30px;height:20px"/> Light rail extension <input type="checkbox" id="visible5" checked> </label></li>
+<li><label><img src="Icons/Ext.png"style="width:30px;height:20px"/> Light rail extension <input type="checkbox" id="visible5" checked> </label></li>
 <li><h4> Urban Farming/Forestry</h4></li>
 <li>None yet<li>
 <li><h4> Urban Renewal</h4></li>
-<li><label><img src="LotIcon.png"/> Vacant Lot Revitalization <input type="checkbox" id="visible3" checked> </label></li>
+<li><label><img src="Icons/LotIcon.png"/> Vacant Lot Revitalization <input type="checkbox" id="visible3" checked> </label></li>
 <li><h4> Waste Recycling </li></h4>
 <li>None yet<li>
 </li>
 </ul>
 </div>
-</div>
-
-<div id="toolbox3">	
-City of Phoenix<br>
-<a href="https://www.phoenix.gov/sustainability" style="color: blue">Visit the City of Phoenix sustainability webpage</a>
 </div>
     <script type="text/javascript">
 	
@@ -172,35 +166,35 @@ City of Phoenix<br>
 	
 		var PhoenixSolar = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'PhoenixSolar.geojson'
+		url: 'GeoJSON/PhoenixSolar.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.50, 18.5],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'Sun.png',
+            src: 'Icons/Sun.png',
 	})
 	})
 	});
 	
 			var PhoenixVacant = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'PhoenixVacant.geojson'
+		url: 'GeoJSON/PhoenixVacant.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.45, 14.8],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'LotIcon.png',
+            src: 'Icons/LotIcon.png',
 	})
 	})
 	});
 			
 	var LightRail = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'LightRailLine.geojson'
+		url: 'GeoJSON/LightRailLine.geojson'
 	}),
 		style: new ol.style.Style({
 			stroke: new ol.style.Stroke({color: 'black', width: 1}),
@@ -210,7 +204,7 @@ City of Phoenix<br>
 			
 	var LightRailExt = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'LightRailExt.geojson'
+		url: 'GeoJSON/LightRailExt.geojson'
 	}),
 		style: new ol.style.Style({
 			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
@@ -220,44 +214,21 @@ City of Phoenix<br>
 	
 	var PhoenixBikeshare = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'PhoenixBikeshare.geojson'
+		url: 'GeoJSON/PhoenixBikeshare.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.45, 14.8],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'Bicycle.png',
+            src: 'Icons/Bicycle.png',
 	})
 	})
-	});
-	
-	var bike = new ol.source.Vector({
-  features: new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'PhoenixBikeshare.geojson'
-	})
-	})
-	})
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [0.45, 14.8],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            src: 'Bicycle.png',
-	})
-	});
-	
-		
-	var cluster = new ol.source.Cluster({
-	distance:5, 
-	threshold: 3,
-	source: bike
 	});
 	
 	var B = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'BikeShareLines.geojson'
+		url: 'GeoJSON/BikeShareLines.geojson'
 	}),
 		style: new ol.style.Style({
 			stroke: new ol.style.Stroke({color: 'blue', width: 1}),
@@ -267,14 +238,14 @@ City of Phoenix<br>
 	
 	var PhoenixGB = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'PhoenixGB.geojson'
+		url: 'GeoJSON/PhoenixGB.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.3, 15],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'Building1.png'
+            src: 'Icons/Building1.png'
 	})
 	})
 	});
@@ -282,14 +253,14 @@ City of Phoenix<br>
 	
 	var PhoenixGP = new ol.layer.Vector({
 	source: new ol.source.GeoJSON({
-		url: 'PhoenixGP.geojson'
+		url: 'GeoJSON/PhoenixGP.geojson'
 	}),
 	style: new ol.style.Style({
 	image: new ol.style.Icon({
 	        anchor: [0.3, 15],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: 'Tree.png'
+            src: 'Icons/Tree.png'
 	})
 	})
 	});
@@ -297,7 +268,7 @@ City of Phoenix<br>
 	  var Phoenix = new ol.layer.Vector({
 		source: new ol.source.GeoJSON({
 			projection: 'EPSG:3857',
-			url: 'Phoenix3857.geojson' 
+			url: 'GeoJSON/Phoenix3857.geojson' 
 		}),
 		style: new ol.style.Style({
 		stroke: new ol.style.Stroke({color: 'black', width: 3}),
@@ -331,8 +302,8 @@ City of Phoenix<br>
         ],
 		overlays: [overlay],
         view: new ol.View({
-          center:[-12460053.00000, 3975855.00000],
-          zoom: 10.7
+          center:[-12490000.00000, 3980000.00000],
+          zoom: 10.5
         })
       });
 	  
