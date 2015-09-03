@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
 	<meta charset="utf-8">
-    <link rel="stylesheet" href="v3.1.1/v3.1.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="openlayers/v3.1.1/css/ol.css" type="text/css">
     <style>
       .map {
-        height: 900px;
+        height: 950px;
         width: 900px;
       }
 	  h1{color:#33CCFF;}
@@ -38,11 +38,11 @@
 	}
 		
     </style>
-    <script src="v3.1.1/v3.1.1/build/ol.js" type="text/javascript"></script>
-	<script src="v3.1.1/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
-	<script src="v3.1.1/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-	<script src="v3.1.1/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
-	<script src="v3.1.1/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
+    <script src="openlayers/v3.1.1/build/ol.js" type="text/javascript"></script>
+	<script src="openlayers/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
+	<script src="openlayers/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+	<script src="openlayers/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
+	<script src="openlayers/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
     <title>City Sustainability</title>
   </head>
   <body>
@@ -57,9 +57,9 @@
       </div>
   	</div>
 	
-<div id="Phoenix">PHOENIX</div>
-<div id="Mesa">MESA</div>
-<div id="Tempe">TEMPE</div>
+<div id="Phoenix"><a href='PhoenixInitiatives.html'>PHOENIX</a></div>
+<div id="Mesa"><a href='MesaInitiatives.html'>MESA</a></div>
+<div id="Tempe"><a href='TempeInitiatives.html'>TEMPE</a></div>
 
 <div id="toolbox2"><h3>Click on a city <br>to see sustainability efforts</h3>
 <ul type="none" id ="layerswitcher">
@@ -230,10 +230,10 @@ var phx = new ol.Overlay({
 });
 map.addOverlay(phx);
 
-document.getElementById("Phoenix").addEventListener("click", link);
-function link() {
-	window.open("PhoenixInitiatives.html", "_parent");
-	}
+// document.getElementById("Phoenix").addEventListener("click", link);
+// function link() {
+// 	window.open("PhoenixInitiatives.html", "_parent");
+// 	}
 
 var pos1 = [-12446623,3951036];
 
@@ -243,10 +243,10 @@ var msa = new ol.Overlay({
 });
 map.addOverlay(msa);
 
-document.getElementById("Mesa").addEventListener("click", link1);
-function link1() {
-	window.open("MesaInitiatives.html", "_parent");
-	}
+// document.getElementById("Mesa").addEventListener("click", link1);
+// function link1() {
+// 	window.open("MesaInitiatives.html", "_parent");
+// 	}
 
 var pos2 = [-12464447,3949950];
 
@@ -255,10 +255,10 @@ var tem = new ol.Overlay({
   element: document.getElementById('Tempe')
 });
 map.addOverlay(tem);
-document.getElementById("Tempe").addEventListener("click", link2);
-function link2() {
-	window.open("TempeInitiatives.html", "_parent");
-	}
+// document.getElementById("Tempe").addEventListener("click", link2);
+// function link2() {
+// 	window.open("TempeInitiatives.html", "_parent");
+// 	}
 	
 		var selectFeature = new ol.interaction.Select({
 		condition: ol.events.condition.mouseMove,
