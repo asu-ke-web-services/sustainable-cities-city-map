@@ -1,9 +1,0 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
-                                                                                
-"features": [
-{ "type": "Feature", "properties": { "wkt_geom": "POINT(-12458696.1369243711233139 3951455.10245002945885062)", "City": "Tempe", "Initiative": "Biofuel", "Location": "1320 E University Dr. Tempe  AZ 85281", "Latitude": 33.422021, "Longitude": -111.918372, "Building": "Fryer oil collection location", "URL_1": "<a target=\"_blank\" href =\"http:\/\/www.tempe.gov\/city-hall\/public-works\/household-products-collection-center-hpcc-\/don-t-trash-it-\">Learn more<\/a>", "Info": null, "Describe": "Used fryer oil can be brought to this location for recycling as part of the City's Fats, Oils and Grease (FOG) program." }, "geometry": { "type": "Point", "coordinates": [ -12458542.70879611, 3951685.7551124524 ] } },
-{ "type": "Feature", "properties": { "wkt_geom": null, "City": "Tempe", "Initiative": "Biofuel", "Location": "Tempe, AZ 85281", "Latitude": 33.424938, "Longitude": -111.938499, "Building": "Tempe City Hall", "URL_1": "<a target=\"_blank\" href=\"http:\/\/www.tempe.gov\/city-hall\/public-works\/water\/water-quality\/tempe-grease-cooperative\">Learn more<\/a>", "Info": "Collect from restaurants", "Describe": "Restaurant grease is collected as part of the City's Fats, Oils, and Grease (FOG) program." }, "geometry": { "type": "Point", "coordinates": [ -12460927.345461659, 3951841.8832963002 ] } }
-]
-}

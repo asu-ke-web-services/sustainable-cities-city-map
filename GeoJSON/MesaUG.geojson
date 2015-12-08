@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
-                                                                                
-"features": [
-{ "type": "Feature", "properties": { "City": "Mesa", "Initiative": "Urban Garden", "Location": "212 E 1st Ave  Mesa  AZ 85210", "Latitude": 33.413362, "Longitude": -111.825609, "Building": "Urban garden", "URL_1": "<a target=\"_blank\" href =\"http:\/\/www.mesaurbangarden.com\/\">Learn more<\/a>", "Info": "Urban garden in the downtown", "Describe": "The Mesa Urban Garden is a city sponsored urban agriculture initiative. Opened to the public in 2013. " }, "geometry": { "type": "Point", "coordinates": [ -12448369.851527711, 3950300.2671158509 ] } }
-]
-}

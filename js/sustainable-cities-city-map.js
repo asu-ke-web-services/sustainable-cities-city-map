@@ -554,7 +554,7 @@ function iconStyle(imageUri) {
     anchorXUnits: 'fraction',
     anchorYUnits: 'pixels',
     opacity: 0.75,
-    scale: 1,
+    scale: 0.6,
     src: imageUri
   }));
 }
