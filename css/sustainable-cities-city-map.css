@@ -7,59 +7,18 @@ h1 {
     color: #33CCFF;
 }
 
-#toolbox2 {
-    position: absolute;
-    font-size: 14px;
-    top: 100px;
-    left: 590px;
-    padding: 5px;
-    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
-    text-align: center;
-    border-radius: 4px;
-    color: black;
-    background: rgba(3, 107, 60, 0.5);
-    z-index: 100;
-}
-
-#layerswitcher {
-    text-align: left;
-    color: white;
-}
-
-#Phoenix {
-    color: #004C2E;
-    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#Mesa {
-    color: #004C2E;
-    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#Tempe {
-    color: #004C2E;
-    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-
-
 .research-map-cities {
   bottom: 15px;
   left: 15px;
-  background-color: rgba(0,250,0,0.3);
+  background-color: rgba(225,225,225,1);
 }
+
+.research-map-cities:hover {
+  bottom: 15px;
+  left: 15px;
+  background-color: rgba(225,225,225,1);
+}
+
 
 .research-map-cities__header{
   text-align: left;
@@ -69,7 +28,13 @@ h1 {
 .research-map-categories {
   bottom: 15px;
   left: 15px;
-  background-color: rgba(0,250,0,0.3);
+  background-color: rgba(225,225,225,1);
+}
+
+.research-map-categories:hover {
+  bottom: 15px;
+  left: 15px;
+  background-color: rgba(225,225,225,1);
 }
 
 .research-map-categories__header{
@@ -114,7 +79,12 @@ canvas {
   padding-left: 5px;
 }
 
+.sub-category-list-icon{
+  display: inline;
+  height: 20px;
+  margin: 5px;
 
+}
 
 .ol-popup {
   position: absolute;

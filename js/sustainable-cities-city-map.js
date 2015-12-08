@@ -99,7 +99,6 @@ $.each(categories, function(index, subCategories) {
   });
 });
 
-console.log(subCategoriesCache);
 var styleAppliedFeaturesCache = [];
 var mapDiv = document.getElementById('map');
 var defaultCity = 'AllEfforts';
@@ -209,6 +208,7 @@ var FeatureController = function(optOptions) {
     target: options.target
   });
 
+
 };
 ol.inherits(FeatureController, ol.control.Control);
 
@@ -254,7 +254,7 @@ var CategoryFeatureController = function(optOptions) {
     var dlTag = $('<dd>').text(index);
     var subDtTag = $($.parseHTML('<div><dl class="subCategoryList"></dl></div>')).find('.subCategoryList');
     $.each(category, function(subIndex, subCategory) {
-      var subDlTag = $('<dd>').html('<label for="' + subIndex + '"><input type="checkbox" id="' + subIndex + '" name="categoriesCheckBox" value="' + subIndex + '" ' + checked + '" >&nbsp;&nbsp;' + subIndex + '</label>');
+      var subDlTag = $('<dd>').html('<label for="' + subIndex + '"><input type="checkbox" id="' + subIndex + '" name="categoriesCheckBox" value="' + subIndex + '" ' + checked + '" >&nbsp;&nbsp;' + subIndex + '</label><img src="' + subCategory.icon + '" class="img-responsive sub-category-list-icon">');
       $(subDtTag).append(subDlTag);
     });
     dlTag.append(subDtTag);
@@ -373,7 +373,6 @@ function setLayerToVisibe(layerName) {
 
 
 map.addControl(featureController);
-
 $('.cityListRadio').hide();
 $('.toggle-city-marker-closer').toggleClass('lower');
 $('.toggle-city-marker').on('click', function() {
@@ -386,12 +385,10 @@ $('.toggle-city').on('click', function() {
   $('.toggle-city-marker-closer').toggleClass('lower');
 });
 
-
-
-
-
+map.addControl(categoryFeatureController);
 $('.categoryListRadio').hide();
 $('.toggle-category-marker-closer').toggleClass('lower');
+
 $('.toggle-category-marker').on('click', function() {
   $('.categoryListRadio').toggle('slow');
   $('.toggle-category-marker-closer').toggleClass('lower');
@@ -401,7 +398,7 @@ $('.toggle-category').on('click', function() {
   $('.categoryListRadio').toggle('slow');
   $('.toggle-category-marker-closer').toggleClass('lower');
 });
-
+map.removeControl(categoryFeatureController);
 var resetMap = function() {
   map.getView().setCenter(center);
   map.getView().setZoom(zoom);
@@ -504,6 +501,7 @@ map.on('singleclick', function(evt) {
             map.getView().setCenter(ol.extent.getCenter(clickedEffortsLayerExtent));
             map.removeControl(featureController);
             map.addControl(categoryFeatureController);
+
           } else {
             layers.item(i).setVisible(false);
           }
@@ -564,11 +562,10 @@ function getFeatureStyle(feature) {
   var properties = feature.getProperties();
 
   var categoryCheckbox = $('input[id="' + properties.Initiative + '"]:checkbox:checked');
-  console.log(properties.Initiative);
   if (properties.Initiative in subCategoriesCache && categoryCheckbox.length == 1) {
     var subCategory = subCategoriesCache[properties.Initiative];
     return getMarkerIconStyle(subCategory.icon);
-  }  else {
+  } else {
     return null
   }
 }
