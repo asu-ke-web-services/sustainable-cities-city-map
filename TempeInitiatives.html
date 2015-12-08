@@ -1,352 +1,441 @@
 <!doctype html>
 <html lang="en">
-  <head>
-	<meta charset="utf-8">
-    <link rel="stylesheet" href="openlayers/v3.1.1/css/ol.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <style>
-		.ol-popup {
-		width: 300px;
-        display: none;
-        position: absolute;
-        background-color: white;
-		opacity: 1.0;
-        -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-      }
-      .ol-popup:after, .ol-popup:before {
-        top: 100%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-      .ol-popup:after {
-        border-top-color: white;
-        border-width: 10px;
-        left: 48px;
-        margin-left: -10px;
-      }
-      .ol-popup:before {
-        border-top-color: #cccccc;
-        border-width: 11px;
-        left: 48px;
-        margin-left: -11px;
-      }
-      .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-		color: #70DB70;
-        right: 8px;
-      }
-	  .ol-popup-content {
-		font-family: Tahoma, Geneva, sans-serif;
-		font-weight: bold;
-		color:  #33CCFF;
-		font-size: 14px;
-		}
-		.ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-		color: #33CCFF;
-        top: 2px;
-        right: 6px;
-      }
-		.ol-popup-closer:after {
-		content: "x";
-		}
-	   #toolbox2       
-	   { position:absolute; top:345px; left:15px; padding:5px; line-height: .001; border-radius:4px; color:black; border-style: double; background: rgba(250, 251, 252, 1.0); z-index:100; }
-	   #layerswitcher { margin:0; font-family: Tahoma, Geneva, sans-serif; padding:10px; border-radius:4px;  list-style-type:none; }
-	   	   h4 {
-	   font-family: Tahoma, Geneva, sans-serif;
-	   color: #33CCFF;	font-size: 14px;
-	   }
-	   
-	   p {
-	   font-family: Tahoma, Geneva, sans-serif;
-	   font-size: 18px;	   color: #33CCFF;
-	   }
-	   	   p1 {
-	   font-family: Tahoma, Geneva, sans-serif;
-	   font-size: 18px;	   color: blue;
-	   }
-	   h1 {
-	   font-family: Tahoma, Geneva, sans-serif;
-	   color: #33CCFF;
-	   }
-	   	   	   li {
-	   font-family: Tahoma, Geneva, sans-serif;
-font-size: 14px;
-	   }
-	  #Tempe {
-	color: 	#004C2E;
-	font-family: Arial Black,Arial Bold,Gadget,sans-serif;
-	font-size: 24px;
-	font-weight: bold;
-	}
-	#columns{
-	    -moz-column-count: 2;
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="openlayers/v3.1.1/css/ol.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <style>
+  .ol-popup {
+    width: 300px;
+    display: none;
+    position: absolute;
+    background-color: white;
+    opacity: 1.0;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    bottom: 12px;
+    left: -50px;
+  }
+
+  .ol-popup:after,
+  .ol-popup:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .ol-popup:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 48px;
+    margin-left: -10px;
+  }
+
+  .ol-popup:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 48px;
+    margin-left: -11px;
+  }
+
+  .ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    color: #70DB70;
+    right: 8px;
+  }
+
+  .ol-popup-content {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+    color: #33CCFF;
+    font-size: 14px;
+  }
+
+  .ol-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    color: #33CCFF;
+    top: 2px;
+    right: 6px;
+  }
+
+  .ol-popup-closer:after {
+    content: "x";
+  }
+
+  #toolbox2 {
+    position: absolute;
+    top: 345px;
+    left: 15px;
+    padding: 5px;
+    line-height: .001;
+    border-radius: 4px;
+    color: black;
+    border-style: double;
+    background: rgba(250, 251, 252, 1.0);
+    z-index: 100;
+  }
+
+  #layerswitcher {
+    margin: 0;
+    font-family: Tahoma, Geneva, sans-serif;
+    padding: 10px;
+    border-radius: 4px;
+    list-style-type: none;
+  }
+
+  h4 {
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #33CCFF;
+    font-size: 14px;
+  }
+
+  p {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18px;
+    color: #33CCFF;
+  }
+
+  p1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18px;
+    color: blue;
+  }
+
+  h1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #33CCFF;
+  }
+
+  li {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+  }
+
+  #Tempe {
+    color: #004C2E;
+    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  #columns {
+    -moz-column-count: 2;
     -moz-column-gap: 10px;
     -webkit-column-count: 2;
     -webkit-column-gap: 10px;
     column-count: 2;
     column-gap: 10px;
-}
-	   
-    </style>
-    <script src="openlayers/v3.1.1/build/ol.js" type="text/javascript"></script>
-	<script src="openlayers/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
-	<script src="openlayers/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-	<script src="openlayers/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
-	<script src="openlayers/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
-    <title></title>
-  </head>
-  <body>
+  }
+  </style>
+  <script src="openlayers/v3.1.1/build/ol.js" type="text/javascript"></script>
+  <script src="openlayers/v3.1.1/ol/ol/pointer/pointerevent.js" type="text/javascript"></script>
+  <script src="openlayers/v3.1.1/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+  <script src="openlayers/v3.1.1/closure-library/closure/goog/ui/popup.js" type="text/javascript"></script>
+  <script src="openlayers/v3.1.1/resources/jquery.min.js" type="text/javascript"></script>
+  <title></title>
+</head>
+
+<body>
   <div id="Tempe">TEMPE</div>
-    <div id="map" class="map"></div>
-		<div class="container">
-		        <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content" class="ol-popup-content"></div>
-        </div>
-      </div>
-  	</div>
-	
-<div id="toolbox2">
-<ul id ="layerswitcher">
-<h3>City of Tempe</h3><br>
-<h4><a target="_blank" href="http://www.tempe.gov/city-hall/public-works/sustainable-tempe" style="color: black">Visit Tempe's sustainability webpage</a></h4>
-<h4><a href="TempeDocuments.html"style="color:black">Click here to view plans/reports</a></h4><br>
-<li><h4>Energy</h4><br><label><img src="Icons/Sun.png"/> Solar<input type="checkbox" id="visible" checked></label></li><br>
-<li><h4>Infrastructure</h4><br><label><img src="Icons/Building1.png"style="width:30px;height:50px"/> Green Building <input type="checkbox" id="visible1" checked></label>
-<li><h4> Transportation</h4> <label><img src="Icons/Ext.png"style="width:30px;height:20px"/> Street Car <input type="checkbox" id="visible5" checked> </label></li>
-</li><li><h4>  Urban Farming/Forestry</h4><label><img src="Icons/Sunflower.png" style="width:40px;height:45px"/> Urban Farm <input type="checkbox" id="visible4" checked> </label></li>
-<li><h4> Urban Renewal </li></h4><br>
-<li><em>None yet</em></li>
-<li><h4>Waste Recycling</h4><label><img src="Icons/CompostIcon.png"style="width:25px;height:40px"/> Compost <input type="checkbox" id="visible3" checked> </label></li>
-<li><label><img src="Icons/Biofuel.png"style="width:50px;height:50px"/> Biofuel <input type="checkbox" id="visible2" checked></label></li>
-</ul>
-</div>
-</div>
+  <div id="map" class="map"></div>
+  <div class="container">
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content" class="ol-popup-content"></div>
+    </div>
+  </div>
+  </div>
+  <div id="toolbox2">
+    <ul id="layerswitcher">
+      <h3>City of Tempe</h3>
+      <br>
+      <h4><a target="_blank" href="http://www.tempe.gov/city-hall/public-works/sustainable-tempe" style="color: black">Visit Tempe's sustainability webpage</a></h4>
+      <h4><a href="TempeDocuments.html"style="color:black">Click here to view plans/reports</a></h4>
+      <br>
+      <li>
+        <h4>Energy</h4>
+        <br>
+        <label><img src="Icons/Sun.png" /> Solar
+          <input type="checkbox" id="visible" checked>
+        </label>
+      </li>
+      <br>
+      <li>
+        <h4>Infrastructure</h4>
+        <br>
+        <label><img src="Icons/Building1.png" style="width:30px;height:50px" /> Green Building
+          <input type="checkbox" id="visible1" checked>
+        </label>
+        <li>
+          <h4> Transportation</h4>
+          <label><img src="Icons/Ext.png" style="width:30px;height:20px" /> Street Car
+            <input type="checkbox" id="visible5" checked> </label>
+        </li>
+      </li>
+      <li>
+        <h4>  Urban Farming/Forestry</h4>
+        <label><img src="Icons/Sunflower.png" style="width:40px;height:45px" /> Urban Farm
+          <input type="checkbox" id="visible4" checked> </label>
+      </li>
+      <li>
+        <h4> Urban Renewal </li></h4>
+        <br>
+        <li><em>None yet</em></li>
+        <li>
+          <h4>Waste Recycling</h4>
+          <label><img src="Icons/CompostIcon.png" style="width:25px;height:40px" /> Compost
+            <input type="checkbox" id="visible3" checked> </label>
+        </li>
+        <li>
+          <label><img src="Icons/Biofuel.png" style="width:50px;height:50px" /> Biofuel
+            <input type="checkbox" id="visible2" checked>
+          </label>
+        </li>
+    </ul>
+  </div>
+  </div>
+  <script type="text/javascript">
+  var container = document.getElementById('popup');
+  var content = document.getElementById('popup-content');
+  var closer = document.getElementById('popup-closer');
 
-    <script type="text/javascript">
-	
-	var container = document.getElementById('popup');
-    var content   = document.getElementById('popup-content');
-    var closer    = document.getElementById('popup-closer');
-	
-	closer.onclick = function() {
-      container.style.display = 'none';
-      closer.blur();
-      return false;
-    };
-	
-	var overlay = new ol.Overlay({
-      element: container
-    });
-	
-	var TempeSolar = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/TempeSolar.geojson'
-	}),
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [30, 52],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            src: 'Icons/Sun.png',
-
-	})
-	})
-	});
-	
-	var LightRail = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/LightRailLine.geojson'
-	}),
-		style: new ol.style.Style({
-			stroke: new ol.style.Stroke({color: 'black', width: 1}),
-			fill: new ol.style.Fill({color:'yellow'})
-		}),
-	});
-	
-	var UrbanFarm = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/UrbanFarm.geojson'
-	}),
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [30, 50],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            src: 'Icons/Sunflower.png'
-	})
-	})
-	});
-	
-	var TempeCompost = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/TempeCompost.geojson'
-	}),
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [30, 52],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            src: 'Icons/CompostIcon.png',
-	})
-	})
-	});
-	
-		var TempeGB = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/TempeGB.geojson'
-	}),
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [30, 52],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            src: 'Icons/Building1.png'
-	})
-	})
-	});
-	
-	var TempeBiofuel = new ol.layer.Vector({
-	source: new ol.source.GeoJSON({
-		url: 'GeoJSON/TempeBiofuel.geojson'
-	}),
-	style: new ol.style.Style({
-	image: new ol.style.Icon({
-	        anchor: [30, 52],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            src: 'Icons/Biofuel.png'
-	})
-	})
-	});
-	
-	  var Tempe = new ol.layer.Vector({
-		source: new ol.source.GeoJSON({
-			url: 'GeoJSON/Tempe3857.geojson' 
-		}),
-		
-		style: new ol.style.Style({
-			stroke: new ol.style.Stroke({color: 'black', width: 3}),
-			fill: new ol.style.Fill({color:'rgba(82,227,152, 0.8)'})
-		}),
-	});
-	
-		  var TempeCar = new ol.layer.Vector({
-		source: new ol.source.GeoJSON({
-			url: 'GeoJSON/TempeCar.geojson' 
-		}),
-		
-		style: new ol.style.Style({
-			stroke: new ol.style.Stroke({color: 'yellow', width: 1}),
-			fill: new ol.style.Fill({color:'yellow'})
-		}),
-	});
-		
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-		  new ol.layer.Tile({
-			source: new ol.source.Stamen({layer: 'watercolor'})
-		  }),
-		  new ol.layer.Tile({
-			source: new ol.source.Stamen({ layer: 'terrain-background'}),
-			opacity: 0.8
-		  }),
-		  new ol.layer.Tile({
-			source: new ol.source.Stamen({layer: 'terrain-lines'})
-		  }),
-	Tempe,
-	LightRail,
-	TempeCar,
-	TempeSolar,
-	TempeGB,
-	TempeCompost,
-	TempeBiofuel,
-	UrbanFarm
-        ],
-		overlays: [overlay],
-        view: new ol.View({
-          center:[-12462070.00000, 3947000.00000],
-          zoom: 12.25
-        })
-      });
-	  
-var visible = new ol.dom.Input(document.getElementById('visible'));
-visible.bindTo('checked', TempeSolar, 'visible');
-
-var visible1 = new ol.dom.Input(document.getElementById('visible1'));
-visible1.bindTo('checked', TempeGB, 'visible');
-
-var visible2 = new ol.dom.Input(document.getElementById('visible2'));
-visible2.bindTo('checked', TempeBiofuel, 'visible');
-
-var visible3 = new ol.dom.Input(document.getElementById('visible3'));
-visible3.bindTo('checked', TempeCompost, 'visible');
-
-var visible4 = new ol.dom.Input(document.getElementById('visible4'));
-visible4.bindTo('checked', UrbanFarm, 'visible');
-
-var visible5 = new ol.dom.Input(document.getElementById('visible5'));
-visible5.bindTo('checked', TempeCar, 'visible');
-
-var pos2 = [-12462447,3949950];
-
-var tem = new ol.Overlay({
-  position: pos2,
-  element: document.getElementById('Tempe')
-});
-map.addOverlay(tem);
-	  
-map.on('click', function(evt) {
-  var feature = map.forEachFeatureAtPixel(evt.pixel,
-      function(feature, layer) {
-        return feature;
-	}, null, function(layer) {
-  if(layer !==Tempe){
-	return true;
-	}
-	return false;
-
-});
-
-  var coordinate = evt.coordinate;
-  var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
-      coordinate, 'EPSG:3857', 'EPSG:4326'));
-
-  overlay.setPosition( coordinate );
-  
-    if ( feature ) { 
-    // if you clicked on a feature
-    // console.log(feature.getProperties());
-    content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + '<p>' + feature.getProperties().Building + '</p>'+ '<p>' + feature.getProperties().Location + '</p>'+ '<p>' + feature.getProperties().Describe + '</p>'+ '<p>' + feature.getProperties().URL_1 + '</p>'; 
-    container.style.display = 'block'; // actually show the container 
-  } else {
-    // we did not click on a feature, so hide the container 
-    content.innerHTML = '';
+  closer.onclick = function() {
     container.style.display = 'none';
     closer.blur();
-  }
+    return false;
+  };
 
-});
-	  
-	var zoomslider = new ol.control.ZoomSlider({});
-	map.addControl(zoomslider);
-    </script>
-  </body>
+  var overlay = new ol.Overlay({
+    element: container
+  });
+
+  var TempeSolar = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/TempeSolar.geojson'
+    }),
+    style: new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [30, 52],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        src: 'Icons/Sun.png',
+
+      })
+    })
+  });
+
+  var LightRail = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/LightRailLine.geojson'
+    }),
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'black',
+        width: 1
+      }),
+      fill: new ol.style.Fill({
+        color: 'yellow'
+      })
+    }),
+  });
+
+  var UrbanFarm = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/UrbanFarm.geojson'
+    }),
+    style: new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [30, 50],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        src: 'Icons/Sunflower.png'
+      })
+    })
+  });
+
+  var TempeCompost = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/TempeCompost.geojson'
+    }),
+    style: new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [30, 52],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        src: 'Icons/CompostIcon.png',
+      })
+    })
+  });
+
+  var TempeGB = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/TempeGB.geojson'
+    }),
+    style: new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [30, 52],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        src: 'Icons/Building1.png'
+      })
+    })
+  });
+
+  var TempeBiofuel = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/TempeBiofuel.geojson'
+    }),
+    style: new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [30, 52],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        src: 'Icons/Biofuel.png'
+      })
+    })
+  });
+
+  var Tempe = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/Tempe3857.geojson'
+    }),
+
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'black',
+        width: 3
+      }),
+      fill: new ol.style.Fill({
+        color: 'rgba(82,227,152, 0.8)'
+      })
+    }),
+  });
+
+  var TempeCar = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      url: 'GeoJSON/TempeCar.geojson'
+    }),
+
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'yellow',
+        width: 1
+      }),
+      fill: new ol.style.Fill({
+        color: 'yellow'
+      })
+    }),
+  });
+
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'watercolor'
+        })
+      }),
+      new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'terrain-background'
+        }),
+        opacity: 0.8
+      }),
+      new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'terrain-lines'
+        })
+      }),
+      Tempe,
+      LightRail,
+      TempeCar,
+      TempeSolar,
+      TempeGB,
+      TempeCompost,
+      TempeBiofuel,
+      UrbanFarm
+    ],
+    overlays: [overlay],
+    view: new ol.View({
+      center: [-12462070.00000, 3947000.00000],
+      zoom: 12.25
+    })
+  });
+
+  var visible = new ol.dom.Input(document.getElementById('visible'));
+  visible.bindTo('checked', TempeSolar, 'visible');
+
+  var visible1 = new ol.dom.Input(document.getElementById('visible1'));
+  visible1.bindTo('checked', TempeGB, 'visible');
+
+  var visible2 = new ol.dom.Input(document.getElementById('visible2'));
+  visible2.bindTo('checked', TempeBiofuel, 'visible');
+
+  var visible3 = new ol.dom.Input(document.getElementById('visible3'));
+  visible3.bindTo('checked', TempeCompost, 'visible');
+
+  var visible4 = new ol.dom.Input(document.getElementById('visible4'));
+  visible4.bindTo('checked', UrbanFarm, 'visible');
+
+  var visible5 = new ol.dom.Input(document.getElementById('visible5'));
+  visible5.bindTo('checked', TempeCar, 'visible');
+
+  var pos2 = [-12462447, 3949950];
+
+  var tem = new ol.Overlay({
+    position: pos2,
+    element: document.getElementById('Tempe')
+  });
+  map.addOverlay(tem);
+
+  map.on('click', function(evt) {
+    var feature = map.forEachFeatureAtPixel(evt.pixel,
+      function(feature, layer) {
+        return feature;
+      }, null,
+      function(layer) {
+        if (layer !== Tempe) {
+          return true;
+        }
+        return false;
+
+      });
+
+    var coordinate = evt.coordinate;
+    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+      coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+    overlay.setPosition(coordinate);
+
+    if (feature) {
+      // if you clicked on a feature
+      // console.log(feature.getProperties());
+      content.innerHTML = '<h1>' + feature.getProperties().Initiative + '</h1>' + '<p>' + '<p>' + feature.getProperties().Building + '</p>' + '<p>' + feature.getProperties().Location + '</p>' + '<p>' + feature.getProperties().Describe + '</p>' + '<p>' + feature.getProperties().URL_1 + '</p>';
+      container.style.display = 'block'; // actually show the container
+    } else {
+      // we did not click on a feature, so hide the container
+      content.innerHTML = '';
+      container.style.display = 'none';
+      closer.blur();
+    }
+
+  });
+
+  var zoomslider = new ol.control.ZoomSlider({});
+  map.addControl(zoomslider);
+  </script>
+</body>
+
 </html>
