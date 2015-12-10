@@ -16,7 +16,7 @@
         "Latitude":33.353433,
         "Longitude":-111.600479,
         "Building":"Fire Station No. 219",
-        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/sustainability\/pdf\/Mesa_Fire_Station_219_LEED.pdf\">Learn more about station 219 solar power<\/a>",
+        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.azcentral.com\/community\/mesa\/articles\/20130513fire-station-in-mesa-earns-leed-gold.html\">Learn more about station 219 solar power<\/a>",
         "Info":"Gold",
         "Describe":"The goal was LEED silver, but the outcome was LEED gold. This Mesa fire station is a great role model for other sustainability efforts in the city and is one of the first LEED certified City of Mesa buildings."
       },
@@ -37,7 +37,7 @@
         "Latitude":33.415210,
         "Longitude":-111.705627,
         "Building":"Fire Station No. 220",
-        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/sustainability\/pdf\/Mesa_Fire_Station_220_LEED.pdf\">Learn more about station 220 solar power<\/a>",
+        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.usgbc.org\/projects\/city-mesa-fire-station-220\">Learn more about station 220 solar power<\/a>",
         "Info":"Gold",
         "Describe":"One of the first LEED certified city of Mesa buildings. 7.5% of the energy used comes from the sun with a 15.18 kW photovoltaic system."
       },
@@ -58,7 +58,7 @@
         "Latitude":33.432229,
         "Longitude":-111.667382,
         "Building":"Red Mountain Multigenerational Center",
-        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/sustainability\/solarday.aspx\">Learn more about the center's solar power<\/a>",
+        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/residents\/sustainability\/solar-resources\">Learn more about the center's solar power<\/a>",
         "Info":"294 kW",
         "Describe":"This building provides recreation for people of all ages and 44% of it's own energy through solar power"
       },
@@ -79,7 +79,7 @@
         "Latitude":33.380139,
         "Longitude":-111.636601,
         "Building":"Fire Station No. 212",
-        "URL_1":"<a target=\"_blank\" href=\"http:\/\/www.mesaaz.gov\/sustainability\/solarday.aspx\">Learn more about station 212 solar power<\/a>",
+        "URL_1":"<a target=\/"_blank\/" href=\/"http://www.mesaaz.gov/residents/sustainability/solar-resources\/">Learn more about station 212 solar power</a>",
         "Info":"185 kW",
         "Describe":"Prospects set on 67% of building energy requirements to come from solar power"
       },
@@ -121,7 +121,7 @@
         "Latitude":33.434844,
         "Longitude":-111.669463,
         "Building":"Red Mountain park",
-        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/sustainability\/pdf\/SolFocusProjectWeb.pdf\">More about Red Mountain Park solar<\/a>",
+        "URL_1":"<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/residents\/sustainability\/solar-resources\">More about Red Mountain Park solar<\/a>",
         "Info":"70.5 kW",
         "Describe":"This Mesa solar installation concentrates the sun's power up to 650 times tradition solar cells via concentrated photo-voltaic structures and 10 dual axis trackers."
       },
@@ -541,7 +541,7 @@
         "Latitude":33.435443,
         "Longitude":-111.993643,
         "Building":"East Economy Parking Lot  Sky Harbor",
-        "URL_1":"<a target=\"_blank\" href =\"https:\/\/skyharbor.com\/PhxPerspective\/SolarPower.html\">Clean energy at sky harbor<\/a>",
+        "URL_1":"<a target=\"_blank\" href =\"https:\/\/www.phoenix.gov\/auditorsite\/Documents\/Renewable%20Energy.pdf\">Clean energy at sky harbor<\/a>",
         "Info":"5400 kW",
         "Describe":"Phoenix's major airport...making solar power!"
       },
