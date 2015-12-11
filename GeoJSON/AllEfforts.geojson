@@ -79,7 +79,7 @@
         "Latitude":33.380139,
         "Longitude":-111.636601,
         "Building":"Fire Station No. 212",
-        "URL_1":"<a target=\/"_blank\/" href=\/"http://www.mesaaz.gov/residents/sustainability/solar-resources\/">Learn more about station 212 solar power</a>",
+        "URL_1":"<<a target=\"_blank\" href =\"http:\/\/www.mesaaz.gov\/residents\/sustainability\/solar-resources\">Learn more about station 212 solar power<\/a>",
         "Info":"185 kW",
         "Describe":"Prospects set on 67% of building energy requirements to come from solar power"
       },
