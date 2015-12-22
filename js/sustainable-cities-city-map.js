@@ -5,44 +5,47 @@ loadJsonOverAjax().done(executeDataDependencyFunction);
 var categories = {
   'Energy': {
     'Solar Power': {
-      'icon': 'Icons/Sun.png'
+      'icon': 'icons/sun.png'
     }
   },
   'Infrastructure': {
     'Green Building': {
-      'icon': 'Icons/Building1.png'
+      'icon': 'icons/building.png'
     },
     'Green Infrastructure': {
-      'icon': 'Icons/tree.png'
+      'icon': 'icons/tree.png'
     }
   },
   'Transportation': {
     'Street Car': {
-      'icon': 'Icons/Ext.png'
+      'icon': 'icons/ext.png'
     },
     'Bike share': {
-      'icon': 'Icons/Bicycle.png'
+      'icon': 'icons/bicycle.png'
+    },
+    'Light Rail': {
+      'icon': 'icons/ext.png'
     },
     'Light rail extension': {
-      'icon': 'Icons/Ext.png'
+      'icon': 'icons/ext.png'
     }
   },
   'Urban Farm\/Forestry': {
     'Urban Garden': {
-      'icon': 'Icons/Sunflower.png'
+      'icon': 'icons/sunflower.png'
     }
   },
   'Urban Renewal': {
     'Vacant lot revitalization': {
-      'icon': 'Icons/LotIcon.png'
+      'icon': 'icons/lot.png'
     }
   },
   'Waste Recycling': {
     'Compost': {
-      'icon': 'Icons/CompostIcon.png'
+      'icon': 'icons/compost.png'
     },
     'Biofuel': {
-      'icon': 'Icons/Biofuel.png'
+      'icon': 'icons/biofuel.png'
     }
   }
 };
@@ -71,7 +74,7 @@ var baseLayer = new ol.layer.Tile({
       html: attribution
     })]
   }),
-  crossOrigin: null,
+  crossOrigin: 'anonymous',
   name: 'base'
 });
 
@@ -133,11 +136,11 @@ var map = new ol.Map({
 function emptyVectorlayer(name, style) {
   return new ol.layer.Vector({
     source: new ol.source.Vector({
-      wrapX: false
+      wrapX: true
     }),
     style: style,
     visible: true,
-    crossOrigin: null,
+    crossOrigin: 'anonymous',
     name: name
   });
 }
@@ -146,11 +149,7 @@ function emptyVectorlayer(name, style) {
 
 function getPopUpContent(feature) {
   var content = '<div class="feature-information">';
-  content += '<h3>'+getTitleMarkUp(feature)+'</h3>'
-  +'<p>'+ getBuildingMarkUp(feature) +'</p>'
-  +'<p>'+ getLocationMarkUp(feature) +'</p>'
-  +'<p>'+ getDescriptionMarkUp(feature)+'</p>'
-  +'<p>'+ getURLMarkUp(feature)+'</p>';
+  content += '<h4><b>' + getTitleMarkUp(feature) + '</b></h4>' + '<p>' + getBuildingMarkUp(feature) + '</p>' + '<p>' + getLocationMarkUp(feature) + '</p>' + '<p>' + getDescriptionMarkUp(feature) + '</p>' + '<p>' + getURLMarkUp(feature) + '</p><br>';
   content += '</div>';
   return content;
 }
@@ -167,8 +166,8 @@ function getTitleMarkUp(feature) {
 function getURLMarkUp(feature) {
   var url = getURL(feature);
   if (url) {
-    //return '<br><a target="_blank" href="' + url + '"><input type="button" value="Read More" /></a>';
-    return url;
+    return '<a target="_blank" href="' + url + '"><input type="button" class="btn-primary" value="Read More" /></a>';
+    //return url;
   } else {
     return '';
   }
@@ -206,11 +205,11 @@ function getTitle(feature) {
   return feature.getProperties().Initiative;
 }
 
-function getBuilding(feature){
+function getBuilding(feature) {
   return feature.getProperties().Building;
 }
 
-function getLocation(feature){
+function getLocation(feature) {
   return feature.getProperties().Location;
 }
 
@@ -238,7 +237,7 @@ function loadJsonOverAjax() {
         citiesData[city].layer.getSource().addFeature(feature);
       } else {
         citiesData[city] = {
-          'layer': emptyVectorlayer(city, groupStyle)
+          'layer': emptyVectorlayer(city, regionStyle)
         };
         citiesData[city].layer.getSource().addFeature(feature);
       }
@@ -307,7 +306,7 @@ function executeDataDependencyFunction() {
     var controller = document.createElement('div');
 
     $(controller).attr({
-      'class': 'research-map-categories ol-control'
+      'class': 'sustainable-map-categories ol-control'
     });
 
 
@@ -319,7 +318,7 @@ function executeDataDependencyFunction() {
       var dlTag = $('<dd>').text(index);
       var subDtTag = $($.parseHTML('<div><dl class="subCategoryList"></dl></div>')).find('.subCategoryList');
       $.each(category, function(subIndex, subCategory) {
-        var subDlTag = $('<dd>').html('<label for="' + subIndex + '"><input type="checkbox" id="' + subIndex + '" name="categoriesCheckBox" value="' + subIndex + '" ' + checked + '" >&nbsp;&nbsp;' + subIndex + '</label><img src="' + subCategory.icon + '" class="img-responsive sub-category-list-icon">');
+        var subDlTag = $('<dd>').html('<label for="' + subIndex + '">&nbsp;<input type="checkbox" id="' + subIndex + '" name="categoriesCheckBox" value="' + subIndex + '" ' + checked + '" >&nbsp;<img src="' + subCategory.icon + '" class="img-responsive sub-category-list-icon">&nbsp;' + subIndex + '</label>');
         $(subDtTag).append(subDlTag);
       });
       dlTag.append(subDtTag);
@@ -367,8 +366,11 @@ function executeDataDependencyFunction() {
       feature.setStyle(null);
     });
     styleAppliedFeaturesCache = [];
-    $('.research-map-categories').hide();
-    $('.research-map-cities').show();
+    $('.sustainable-map-categories').hide();
+    $('.sustainable-map-cities').show();
+
+    overlay.setPosition(undefined);
+    popUpCloser.blur();
 
   };
 
@@ -400,53 +402,61 @@ function executeDataDependencyFunction() {
 
   // display info on click
   map.on('singleclick', function(evt) {
-    var feature = map.forEachFeatureAtPixel(evt.pixel,
+    var content = '';
+    var foundPoint=false;
+    map.forEachFeatureAtPixel(evt.pixel,
       function(feature, layer) {
-        return feature;
-      });
-
-    if (feature) {
-      if (feature.getGeometry() instanceof ol.geom.Point) {
-        var coordinate = evt.coordinate;
-        popUpContent.innerHTML =  getPopUpContent(feature);
-        overlay.setPosition(coordinate);
-      } else {
-        var properties = feature.getProperties();
-        var clickedEffortsLayer = properties.NAME;
-        var layers = map.getLayers();
-        var size = (map.getSize());
-        var clickedEffortsLayerExtent;
-        var effortsLayer = efforts[clickedEffortsLayer];
-        effortsLayer.layer.setVisible(true);
-
-        var features = effortsLayer.layer.getSource().getFeatures();
-        $.each(features, function() {
-          this.setStyle(getFeatureStyleonZoom(this));
-          styleAppliedFeaturesCache.push(this);
-        });
-        $('input[name="layers"][value="' + clickedEffortsLayer + '"]:not("#All"):checkbox').checked = true;
-
-        var citiesLayer = citiesData[clickedEffortsLayer];
-        citiesLayer.layer.setVisible(true);
-
-        clickedEffortsLayerExtent = citiesLayer.layer.getSource().getExtent();
-        map.getView().fit(
-          clickedEffortsLayerExtent,
-          size, {
-            padding: [30, 30, 30, 30],
-            constrainResolution: false
+        if (feature) {
+          if (feature.getProperties().City) {
+              var coordinate = evt.coordinate;
+              content = content + getPopUpContent(feature);
+              //popUpContent.innerHTML =  getPopUpContent(feature);
+              overlay.setPosition(coordinate);
+              foundPoint = true;
           }
-        );
-        map.getView().setCenter(ol.extent.getCenter(clickedEffortsLayerExtent));
-        $('.research-map-categories').show();
-        $('.research-map-cities').hide();
+          if(foundPoint==false && feature.getProperties().NAME){
+            var properties = feature.getProperties();
+            var clickedEffortsLayer = properties.NAME;
+            var layers = map.getLayers();
+            var size = (map.getSize());
+            var clickedEffortsLayerExtent;
+            var effortsLayer = efforts[clickedEffortsLayer];
+            effortsLayer.layer.setVisible(true);
 
-      }
+            var features = effortsLayer.layer.getSource().getFeatures();
+            $.each(features, function() {
+              this.setStyle(getFeatureStyleonZoom(this));
+              styleAppliedFeaturesCache.push(this);
+            });
+            $('input[name="layers"][value="' + clickedEffortsLayer + '"]:not("#All"):checkbox').checked = true;
 
-    } else {
-      resetMap();
-    }
+            var citiesLayer = citiesData[clickedEffortsLayer];
+            citiesLayer.layer.setVisible(true);
 
+            clickedEffortsLayerExtent = citiesLayer.layer.getSource().getExtent();
+            map.getView().fit(
+              clickedEffortsLayerExtent,
+              size, {
+                padding: [30, 30, 30, 30],
+                constrainResolution: false
+              }
+            );
+            map.getView().setCenter(ol.extent.getCenter(clickedEffortsLayerExtent));
+            $('.sustainable-map-categories').show();
+            $('.sustainable-map-cities').hide();
+
+          }
+
+        } else {
+          resetMap();
+        }
+      });
+  if(content!=''){
+    popUpContent.innerHTML = content;
+  }else{
+    overlay.setPosition(undefined);
+    popUpCloser.blur();
+  }
   });
 
 
@@ -462,7 +472,7 @@ function executeDataDependencyFunction() {
     var controller = document.createElement('div');
 
     $(controller).attr({
-      'class': 'research-map-cities ol-control'
+      'class': 'sustainable-map-cities ol-control'
     });
 
     var cities = '<a href="#" class="toggle-city">Select City</a><div id="toggle-city-marker" class="toggle-city-marker"><a href="#" class="toggle-city-marker-closer"></a></div><div class="cityListRadio"><dl class="cityList"><dt ></dt></dl></div>';
@@ -557,7 +567,7 @@ function executeDataDependencyFunction() {
     $('.toggle-category-marker-closer').toggleClass('lower');
   });
 
-  $('.research-map-categories').hide();
+  $('.sustainable-map-categories').hide();
 
 
 }
@@ -578,7 +588,7 @@ function getStyle(feature, resolution) {
   })];
 }
 
-function groupStyle(feature, resolution) {
+function regionStyle(feature, resolution) {
   var properties = feature.getProperties();
   return [new ol.style.Style({
     fill: new ol.style.Fill({
@@ -598,8 +608,8 @@ function iconStyle(imageUri) {
     anchor: [0.5, 20],
     anchorXUnits: 'fraction',
     anchorYUnits: 'pixels',
-    opacity: 0.75,
-    scale: 0.6,
+    opacity: 1,
+    scale: 1,
     src: imageUri
   }));
 }
@@ -607,8 +617,22 @@ function iconStyle(imageUri) {
 
 function getFeatureStyleonZoom(feature) {
   var properties = feature.getProperties();
+
   if (properties.Initiative in subCategoriesCache && $('input[id="' + properties.Initiative + '"]:checkbox:checked').length == 1) {
     var subCategory = subCategoriesCache[properties.Initiative];
+    var geometry = feature.getGeometry();
+    if(properties.Initiative == 'Light rail extension'){
+      return [new ol.style.Style({
+        stroke: new ol.style.Stroke({color: 'blue', width: 1}),
+        fill: new ol.style.Fill({color:'blue'})
+      })];
+    }
+    if(properties.Initiative == 'Light Rail' || properties.Initiative == 'Street Car'){
+      return [new ol.style.Style({
+        stroke: new ol.style.Stroke({color: 'yellow', width: 2}),
+        fill: new ol.style.Fill({color:'yellow'})
+      })];
+    }
     return [getMarkerIconStyle(subCategory.icon)];
   } else {
     return null

@@ -1,43 +1,47 @@
-.map {
+.map-container{
     height: 950px;
     width: 845px;
 }
 
+.map{
+  width: 100%;
+  height: 100%;
+}
 h1 {
     color: #33CCFF;
 }
 
-.research-map-cities {
+.sustainable-map-cities {
   bottom: 15px;
   left: 15px;
   background-color: rgba(225,225,225,1);
 }
 
-.research-map-cities:hover {
+.sustainable-map-cities:hover {
   bottom: 15px;
   left: 15px;
   background-color: rgba(225,225,225,1);
 }
 
 
-.research-map-cities__header{
+.sustainable-map-cities__header{
   text-align: left;
   font-weight: bold;
 }
 
-.research-map-categories {
+.sustainable-map-categories {
   bottom: 15px;
   left: 15px;
   background-color: rgba(225,225,225,1);
 }
 
-.research-map-categories:hover {
+.sustainable-map-categories:hover {
   bottom: 15px;
   left: 15px;
   background-color: rgba(225,225,225,1);
 }
 
-.research-map-categories__header{
+.sustainable-map-categories__header{
   text-align: left;
   font-weight: bold;
 }
@@ -72,30 +76,54 @@ canvas {
 
 .categoryList label {
   font-weight: normal;
+  margin-bottom: 0;
 }
-.categoryList dd {
+.categoryList dl{
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.categoryList > dd {
   font-weight: bold;
   line-height: 1;
-  padding-left: 5px;
+  margin: 10px 0 0 10px;
 }
 
+.subCategoryList > dd{
+  font-weight: bold;
+  line-height: 1;
+  margin: 0 0 0 10px;
+}
 .sub-category-list-icon{
   display: inline;
-  height: 20px;
-  margin: 5px;
-
+  height: 13px;
 }
 
+
 .ol-popup {
+  position: absolute;
   background-color: white;
   -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
   filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-  padding: 15px;
+  padding: 5px;
   border-radius: 10px;
   border: 1px solid #cccccc;
   bottom: 12px;
   left: -50px;
-  min-width: 50px;
+
+
+}
+
+#popup-content{
+  min-width: 280px;
+  min-height: 220px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.feature-information{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .ol-popup:after, .ol-popup:before {
   top: 100%;
@@ -119,17 +147,16 @@ canvas {
   margin-left: -11px;
 }
 .ol-popup-closer {
-  text-decoration: none;
   position: absolute;
   top: 2px;
-  right: 8px;
+  right: 30px;
+  text-decoration: none !important;
 }
 .ol-popup-closer:after {
   content: "x";
 }
 
 .toggle-city-marker-closer{
-  text-decoration: none;
   position: absolute;
   top: 2px;
   right: 8px;
@@ -168,10 +195,6 @@ canvas {
   text-decoration: none !important;
 }
 
-
-.main-info{
-  overflow: scroll;
-}
 
 .sk-cube-grid {
   width: 44px;
