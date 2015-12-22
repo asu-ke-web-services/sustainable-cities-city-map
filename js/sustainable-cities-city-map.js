@@ -1,5 +1,6 @@
 var efforts = {};
 var citiesData = {};
+
 loadJsonOverAjax().done(executeDataDependencyFunction);
 
 var categories = {
@@ -398,65 +399,54 @@ function executeDataDependencyFunction() {
   ol.inherits(ResetMapControl, ol.control.Control);
   map.addControl(new ResetMapControl());
 
-
-
-  // display info on click
   map.on('singleclick', function(evt) {
-    var content = '';
-    var foundPoint=false;
-    map.forEachFeatureAtPixel(evt.pixel,
-      function(feature, layer) {
-        if (feature) {
-          if (feature.getProperties().City) {
-              var coordinate = evt.coordinate;
-              content = content + getPopUpContent(feature);
-              //popUpContent.innerHTML =  getPopUpContent(feature);
-              overlay.setPosition(coordinate);
-              foundPoint = true;
-          }
-          if(foundPoint==false && feature.getProperties().NAME){
-            var properties = feature.getProperties();
-            var clickedEffortsLayer = properties.NAME;
-            var layers = map.getLayers();
-            var size = (map.getSize());
-            var clickedEffortsLayerExtent;
-            var effortsLayer = efforts[clickedEffortsLayer];
-            effortsLayer.layer.setVisible(true);
+    var informationContent = '';
+    var overlayCoordinate = evt.coordinate;
+    var foundEffort=false;
+    map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
 
-            var features = effortsLayer.layer.getSource().getFeatures();
-            $.each(features, function() {
-              this.setStyle(getFeatureStyleonZoom(this));
-              styleAppliedFeaturesCache.push(this);
-            });
-            $('input[name="layers"][value="' + clickedEffortsLayer + '"]:not("#All"):checkbox').checked = true;
+      if (feature) {
+        var properties = feature.getProperties();
 
-            var citiesLayer = citiesData[clickedEffortsLayer];
-            citiesLayer.layer.setVisible(true);
-
-            clickedEffortsLayerExtent = citiesLayer.layer.getSource().getExtent();
-            map.getView().fit(
-              clickedEffortsLayerExtent,
-              size, {
-                padding: [30, 30, 30, 30],
-                constrainResolution: false
-              }
-            );
-            map.getView().setCenter(ol.extent.getCenter(clickedEffortsLayerExtent));
-            $('.sustainable-map-categories').show();
-            $('.sustainable-map-cities').hide();
-
-          }
-
-        } else {
-          resetMap();
+        if (!properties.NAME && properties.City) { //If feature is from effort layer
+          informationContent = informationContent + getPopUpContent(feature);
+          foundEffort=true;
         }
-      });
-  if(content!=''){
-    popUpContent.innerHTML = content;
-  }else{
-    overlay.setPosition(undefined);
-    popUpCloser.blur();
-  }
+
+        if (foundEffort==false && properties.NAME) { //If feature is from city region layer
+          var effortsLayer = efforts[properties.NAME];
+          var features = effortsLayer.layer.getSource().getFeatures();
+          $.each(features, function() {
+            this.setStyle(getFeatureStyleonZoom(this));
+            styleAppliedFeaturesCache.push(this);
+          });
+          $('input[name="layers"][value="' + properties.NAME + '"]:not("#All"):checkbox').checked = true;
+
+          map.getView().fit(
+            layer.getSource().getExtent(),
+            map.getSize(), {
+              padding: [30, 30, 30, 30],
+              constrainResolution: false
+            }
+          );
+          $('.sustainable-map-categories').show();
+          $('.sustainable-map-cities').hide();
+
+        }
+
+      } else {
+        resetMap();
+      }
+
+    });
+  if (informationContent != '') {
+      popUpContent.innerHTML = informationContent;
+      overlay.setPosition(overlayCoordinate);
+
+    } else {
+      overlay.setPosition(undefined);
+      popUpCloser.blur();
+    }
   });
 
 
@@ -621,16 +611,26 @@ function getFeatureStyleonZoom(feature) {
   if (properties.Initiative in subCategoriesCache && $('input[id="' + properties.Initiative + '"]:checkbox:checked').length == 1) {
     var subCategory = subCategoriesCache[properties.Initiative];
     var geometry = feature.getGeometry();
-    if(properties.Initiative == 'Light rail extension'){
+    if (properties.Initiative == 'Light rail extension') {
       return [new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'blue', width: 1}),
-        fill: new ol.style.Fill({color:'blue'})
+        stroke: new ol.style.Stroke({
+          color: 'blue',
+          width: 1
+        }),
+        fill: new ol.style.Fill({
+          color: 'blue'
+        })
       })];
     }
-    if(properties.Initiative == 'Light Rail' || properties.Initiative == 'Street Car'){
+    if (properties.Initiative == 'Light Rail' || properties.Initiative == 'Street Car') {
       return [new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'yellow', width: 2}),
-        fill: new ol.style.Fill({color:'yellow'})
+        stroke: new ol.style.Stroke({
+          color: 'yellow',
+          width: 2
+        }),
+        fill: new ol.style.Fill({
+          color: 'yellow'
+        })
       })];
     }
     return [getMarkerIconStyle(subCategory.icon)];

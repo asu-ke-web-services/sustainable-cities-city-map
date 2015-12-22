@@ -15283,26 +15283,26 @@
       }
     },
     {
-      "type":"Feature",
-      "properties":{
-        "City":"Phoenix",
-        "Initiative":"Solar Power",
-        "Location":"323 N. 4th Avenue, Phoenix, AZ 85003",
-        "Latitude":33.452224,
-        "Longitude":-112.078608,
-        "Building":"Fire Station #1",
-        "URL_1":"http:\/\/www.skyrenewableenergy.com\/latest-solar-projects\/",
-        "Info":"19.74 kW",
-        "Describe":"Phoenix Fire Station"
-      },
-      "geometry":{
-        "type":"Point",
-        "coordinates":[
-          -12469160.547545208,
-          3961669.7217009207
-        ]
-      }
-    },
+  "type": "Feature",
+  "properties": {
+    "wkt_geom": "POINT(-12469160.54754520766437054 3961669.72170092072337866)",
+    "City": "Phoenix",
+    "Initiative": "Solar Power",
+    "Location": "323 N. 4th Avenue, Phoenix, AZ 85003",
+    "Latitude": 33.452224,
+    "Longitude": -112.078608,
+    "Building": "Fire Station #1",
+    "URL_1": "http:\/\/www.skyrenewableenergy.com\/latest-solar-projects",
+    "Info": "19.74 kW",
+    "Describe": "This Phoenix fire station includes 19.74 kW of solar power."
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -12476533.571378918,
+      3955484.1245059585]
+  }
+},
     {
       "type":"Feature",
       "properties":{

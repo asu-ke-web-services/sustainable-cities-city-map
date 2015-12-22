@@ -27,7 +27,7 @@
         "POP2013":165158,
         "PCT_CHG":0.303051,
         "Map":"<a target=\"_blank\" href=\"TempeInitiatives.html\">Explore sustainability in Tempe<\/a>",
-        "color":"rgba(160,103,104,0.8)"
+        "color":"rgba(102, 153, 153,0.5)"
       },
       "geometry":{
         "type":"MultiPolygon",
@@ -3321,7 +3321,7 @@
         "POP2013":450310,
         "PCT_CHG":1.226015,
         "Map":"<a target=\"_blank\" href=\"MesaInitiatives.html\">Explore sustainability in Mesa<\/a>",
-        "color":"rgba(15,103,104,0.8)"
+        "color":"rgba(15,103,104,0.5)"
       },
       "geometry":{
         "type":"MultiPolygon",
@@ -12285,7 +12285,7 @@
         "POP2013":1485751,
         "PCT_CHG":1.435353,
         "Map":"<a target=\"_blank\" href=\"PhoenixInitiatives.html\">Explore!<\/a>",
-        "color":"rgba(100,150,30,0.5)"
+        "color":"rgba(0, 204, 204,0.5)"
       },
       "geometry":{
         "type":"MultiPolygon",
