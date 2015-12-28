@@ -30,14 +30,14 @@ h1 {
 }
 
 .sustainable-map-categories {
-  bottom: 15px;
-  left: 15px;
+  top: 15px;
+  right: 15px;
   background-color: rgba(225,225,225,1);
 }
 
 .sustainable-map-categories:hover {
-  bottom: 15px;
-  left: 15px;
+  top: 15px;
+  right: 15px;
   background-color: rgba(225,225,225,1);
 }
 
@@ -68,7 +68,9 @@ canvas {
   line-height: 1;
 }
 
-
+.city-reports h4{
+  font-weight: bold;
+}
 .toggle-category{
   text-align: left;
   font-weight: bold;

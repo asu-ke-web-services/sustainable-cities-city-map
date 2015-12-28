@@ -1,64 +1,8 @@
 var efforts = {};
-var citiesData = {};
-
+var cityBoundaries = {};
+var categories = {};
 loadJsonOverAjax().done(executeDataDependencyFunction);
 
-var categories = {
-  'Energy': {
-    'Solar Power': {
-      'icon': 'icons/sun.png'
-    }
-  },
-  'Infrastructure': {
-    'Green Building': {
-      'icon': 'icons/building.png'
-    },
-    'Green Infrastructure': {
-      'icon': 'icons/tree.png'
-    }
-  },
-  'Transportation': {
-    'Street Car': {
-      'icon': 'icons/ext.png'
-    },
-    'Bike share': {
-      'icon': 'icons/bicycle.png'
-    },
-    'Light Rail': {
-      'icon': 'icons/ext.png'
-    },
-    'Light rail extension': {
-      'icon': 'icons/ext.png'
-    }
-  },
-  'Urban Farm\/Forestry': {
-    'Urban Garden': {
-      'icon': 'icons/sunflower.png'
-    }
-  },
-  'Urban Renewal': {
-    'Vacant lot revitalization': {
-      'icon': 'icons/lot.png'
-    }
-  },
-  'Waste Recycling': {
-    'Compost': {
-      'icon': 'icons/compost.png'
-    },
-    'Biofuel': {
-      'icon': 'icons/biofuel.png'
-    }
-  }
-};
-
-var subCategoriesCache = {};
-$.each(categories, function(index, subCategories) {
-  $.each(subCategories, function(subIndex, subcategory) {
-    subCategoriesCache[subIndex] = subcategory;
-  });
-});
-
-var styleAppliedFeaturesCache = [];
 var mapDiv = document.getElementById('map');
 var defaultCity = 'All';
 var zoom = 10.6;
@@ -234,14 +178,12 @@ function loadJsonOverAjax() {
     var allCities = format.readFeatures(geojsonObject);
     $.each(allCities, function(index, feature) {
       var city = feature.getProperties().NAME;
-      if (citiesData[city]) {
-        citiesData[city].layer.getSource().addFeature(feature);
-      } else {
-        citiesData[city] = {
+      if (!cityBoundaries[city]) {
+        cityBoundaries[city] = {
           'layer': emptyVectorlayer(city, regionStyle)
         };
-        citiesData[city].layer.getSource().addFeature(feature);
       }
+      cityBoundaries[city].layer.getSource().addFeature(feature);
     });
     a.resolve();
   });
@@ -250,18 +192,40 @@ function loadJsonOverAjax() {
     var format = new ol.format.GeoJSON();
     var allEfforts = format.readFeatures(geojsonObject);
     $.each(allEfforts, function(index, feature) {
-      var city = feature.getProperties().City;
-      if (efforts[city]) {
-        efforts[city].layer.getSource().addFeature(feature);
-      } else {
-        efforts[city] = {
-          'layer': emptyVectorlayer(city + 'Efforts', styleFunction)
-        };
-        efforts[city].layer.getSource().addFeature(feature);
-      }
+
+      addFeature(efforts, feature);
     });
     b.resolve();
   });
+
+  $.getJSON('GeoJSON/Reports.json', function(reports) {
+    $.each(reports, function(index, report) {
+      $.each(report, function(cityIndex, cityData) {
+        var city = cityData.city;
+        var initiatives = cityData.initiatives;
+        var header = $('<h4>').text( city + ' Plans/Reports');
+        var reportsDiv=$('<div class="table-reponsive">');
+        var table= $('<table class="table table-bordered">');
+        $.each(initiatives, function(intiativeIndex, initiative) {
+          var icon = initiative.icon;
+          var data = initiative.data;
+          var tr=$('<tr>');
+          tr.append($('<td>').html('<img src="icons/'+icon+'"> &nbsp;'+intiativeIndex));
+          var td=$('<td>');
+          $.each(data, function() {
+            var url='<a target="_blank" href="'+this.url+'">'+this.description+'</a>';
+            var innerTR=$('<tr>').append($('<td>').html(url));
+            td.append(innerTR);
+            table.append(tr.append(td));
+          });
+        });
+        reportsDiv.append(table);
+        $('.city-reports').append(header);
+        $('.city-reports').append(reportsDiv);
+      });
+    });
+  });
+
 
   return $.Deferred(function(def) {
     $.when(a, b).done(function() {
@@ -271,9 +235,69 @@ function loadJsonOverAjax() {
 };
 
 
+function addCity(efforts, city) {
+  efforts[city] = {};
+}
+
+function addCategory(efforts, city, category) {
+  if (!hasCity(efforts, city)) {
+    addCity(efforts, city);
+  }
+  efforts[city][category] = {};
+}
+
+function addInitiative(efforts, city, category, initiative) {
+
+  var initiativeObj = {
+    'icon': getIconPath(initiative),
+    'layer': emptyVectorlayer(city + category + initiative, styleFunction)
+  };
+
+  if (!hasCategory(efforts, city, category)) {
+    addCategory(efforts, city, category);
+  }
+  efforts[city][category][initiative] = initiativeObj;
+}
+
+function addFeature(efforts, feature) {
+  var city = feature.getProperties().City;
+  var initiative = feature.getProperties().Initiative;
+  var category = feature.getProperties().Category;
+
+  if (!hasInitiative(efforts, city, category, initiative)) {
+    addInitiative(efforts, city, category, initiative);
+  }
+
+  efforts[city][category][initiative].layer.getSource().addFeature(feature);
+
+}
+
+function hasInitiative(efforts, city, category, initiative) {
+  if (efforts && efforts[city] && efforts[city][category] && efforts[city][category][initiative]) {
+    return true;
+  }
+  return false;
+}
+
+function hasCategory(efforts, city, category) {
+
+  if (efforts && efforts[city] && efforts[city][category]) {
+    return true;
+  }
+  return false;
+}
+
+function hasCity(efforts, city) {
+
+  if (efforts && efforts[city]) {
+    return true;
+  }
+  return false;
+}
+
 function executeDataDependencyFunction() {
   // Handle the user selection
-  var handleCheckBoxOnClick = function() {
+  /*var handleCheckBoxOnClick = function() {
     var layers = map.getLayers();
     var $selectedCities = $('input[name="layers"]:not("#All"):checkbox:checked');
     $.each(efforts, function() {
@@ -283,15 +307,23 @@ function executeDataDependencyFunction() {
     $selectedCities.map(function() {
       efforts[this.value].layer.setVisible(true);
     });
-  };
+  };*/
   // Handle the user selection
   var handleCategoriesCheckBoxOnClick = function() {
-    var layerName = defaultCity;
     var layers = map.getLayers();
+    var $selectedCategories = $('input[name="categoriesCheckBox"]:checkbox:not(:checked)');
 
-    $.each(styleAppliedFeaturesCache, function() {
-      this.setStyle(getFeatureStyleonZoom(this));
-    });
+    for (var i = 0; i < layers.getLength(); i++) {
+      layers.item(i).setVisible(true);
+      var layerName = layers.item(i).get('name');
+      $selectedCategories.map(function(index, element) {
+        var category = element.value;
+        if (layerName.indexOf(category) > -1) {
+          layers.item(i).setVisible(false);
+        }
+      });
+    }
+
   };
 
 
@@ -314,6 +346,7 @@ function executeDataDependencyFunction() {
     var categoriesDiv = $.parseHTML('<a href="#" class="toggle-category">Select Category</a><div id="toggle-category-marker" class="toggle-category-marker"><a href="#" class="toggle-category-marker-closer"></a></div><div class="categoryListRadio"><dl class="categoryList"></dl></div>');
 
     var dtTag = $(categoriesDiv).find('.categoryList');
+    categories = getCategories();
     $.each(categories, function(index, category) {
       var checked = 'checked="checked"';
       var dlTag = $('<dd>').text(index);
@@ -356,20 +389,15 @@ function executeDataDependencyFunction() {
   var resetMap = function() {
     map.getView().setCenter(center);
     map.getView().setZoom(zoom);
-    $.each($('input[name="layers"]:checkbox'), function() {
+    $.each($('input[name="categoriesCheckBox"]:checkbox'), function() {
       this.checked = true;
     });
     var layers = map.getLayers();
     for (var i = 0; i < layers.getLength(); i++) {
       layers.item(i).setVisible(true);
     }
-    $.each(styleAppliedFeaturesCache, function(index, feature) {
-      feature.setStyle(null);
-    });
-    styleAppliedFeaturesCache = [];
-    $('.sustainable-map-categories').hide();
-    $('.sustainable-map-cities').show();
 
+    $('.sustainable-map-categories').show();
     overlay.setPosition(undefined);
     popUpCloser.blur();
 
@@ -402,7 +430,7 @@ function executeDataDependencyFunction() {
   map.on('singleclick', function(evt) {
     var informationContent = '';
     var overlayCoordinate = evt.coordinate;
-    var foundEffort=false;
+    var foundEffort = false;
     map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
 
       if (feature) {
@@ -410,28 +438,7 @@ function executeDataDependencyFunction() {
 
         if (!properties.NAME && properties.City) { //If feature is from effort layer
           informationContent = informationContent + getPopUpContent(feature);
-          foundEffort=true;
-        }
-
-        if (foundEffort==false && properties.NAME) { //If feature is from city region layer
-          var effortsLayer = efforts[properties.NAME];
-          var features = effortsLayer.layer.getSource().getFeatures();
-          $.each(features, function() {
-            this.setStyle(getFeatureStyleonZoom(this));
-            styleAppliedFeaturesCache.push(this);
-          });
-          $('input[name="layers"][value="' + properties.NAME + '"]:not("#All"):checkbox').checked = true;
-
-          map.getView().fit(
-            layer.getSource().getExtent(),
-            map.getSize(), {
-              padding: [30, 30, 30, 30],
-              constrainResolution: false
-            }
-          );
-          $('.sustainable-map-categories').show();
-          $('.sustainable-map-cities').hide();
-
+          foundEffort = true;
         }
 
       } else {
@@ -439,7 +446,7 @@ function executeDataDependencyFunction() {
       }
 
     });
-  if (informationContent != '') {
+    if (informationContent != '') {
       popUpContent.innerHTML = informationContent;
       overlay.setPosition(overlayCoordinate);
 
@@ -450,97 +457,16 @@ function executeDataDependencyFunction() {
   });
 
 
-  /**
-   * To add controls to the map on click checkbox
-   * @constructor
-   * @extends {ol.control.Control}
-   * @param {Object=} optOptions Control options.
-   */
-  var FeatureController = function(optOptions) {
+  $.each(cityBoundaries, function() {
+    map.addLayer(this.layer);
+  });
 
-    var options = optOptions || {};
-    var controller = document.createElement('div');
-
-    $(controller).attr({
-      'class': 'sustainable-map-cities ol-control'
-    });
-
-    var cities = '<a href="#" class="toggle-city">Select City</a><div id="toggle-city-marker" class="toggle-city-marker"><a href="#" class="toggle-city-marker-closer"></a></div><div class="cityListRadio"><dl class="cityList"><dt ></dt></dl></div>';
-
-    var citiesDiv = $.parseHTML(cities);
-
-    var dtTag = $(citiesDiv).find('.cityList');
-    var checked = 'checked="checked"';
-    var dlAllTag = $('<dd>').html('<label for="All"><input type="checkbox" id="All" name="layers" value="All" ' + checked + ' >&nbsp;&nbsp; All</label>');
-
-    $(dlAllTag).find('#All').on('change', function(event) {
-      if (this.checked) {
-        $('input[name="layers"]:not("#All"):checkbox').each(function() {
-          this.checked = true;
-        });
-      } else {
-        $('input[name="layers"]:not("#All"):checkbox').each(function() {
-          this.checked = false;
-        });
-      }
-    });
-
-    $(dtTag).append(dlAllTag);
-
-    $.each(efforts, function(index, layer) {
-
-      dlTag = $('<dd>').html('<label for="' + index + '"><input type="checkbox" id="' + index + '" name="layers" value="' + index + '" ' + checked + ' >&nbsp;&nbsp;' + index + '</label>');
-
-      $(dlTag).find('#' + index).on('change', function(event) {
-
-        if ($('input[name="layers"]:not("#All"):checkbox').length == $('input[name="layers"]:not("#All"):checkbox:checked').length) {
-          $(dtTag).find('#All')[0].checked = true;
-        } else {
-          $(dtTag).find('#All')[0].checked = false;
-        }
+  $.each(efforts, function(cityIndex, city) {
+    $.each(city, function(categoryIndex, category) {
+      $.each(category, function(initiativeIndex, initiative) {
+        map.addLayer(initiative.layer);
       });
-
-      $(dtTag).append(dlTag);
     });
-
-
-    $(controller).append(citiesDiv);
-
-    $(controller).on('change', handleCheckBoxOnClick);
-
-    ol.control.Control.call(this, {
-      element: controller,
-      target: options.target
-    });
-
-
-  };
-  ol.inherits(FeatureController, ol.control.Control);
-
-  var featureController = new FeatureController();
-
-
-  $.each(citiesData, function() {
-    map.addLayer(this.layer);
-  });
-
-  $.each(efforts, function() {
-    map.addLayer(this.layer);
-  });
-
-
-  map.addControl(featureController);
-
-  $('.cityListRadio').hide();
-  $('.toggle-city-marker-closer').toggleClass('lower');
-  $('.toggle-city-marker').on('click', function() {
-    $('.cityListRadio').toggle('slow');
-    $('.toggle-city-marker-closer').toggleClass('lower');
-  });
-
-  $('.toggle-city').on('click', function() {
-    $('.cityListRadio').toggle('slow');
-    $('.toggle-city-marker-closer').toggleClass('lower');
   });
 
   map.addControl(categoryFeatureController);
@@ -557,25 +483,104 @@ function executeDataDependencyFunction() {
     $('.toggle-category-marker-closer').toggleClass('lower');
   });
 
-  $('.sustainable-map-categories').hide();
+  $('.sustainable-map-categories').show();
 
 
 }
 
-function getStyle(feature, resolution) {
+function getIconPath(name) {
+  return 'icons/' + name + '.png';
+}
 
-  return [new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 2,
-      stroke: new ol.style.Stroke({
-        color: 'rgba(255,0,0,0.8)',
-        width: 5
-      }),
-      fill: new ol.style.Fill({
-        color: 'rgba(255,0,0,0.8)'
-      })
-    })
-  })];
+function getCategories() {
+  var categories = {};
+  $.each(efforts, function(cityIndex, city) {
+    $.each(city, function(categoryIndex, category) {
+      $.each(category, function(initiativeIndex, initiative) {
+
+        if (!categories[categoryIndex]) {
+          categories[categoryIndex] = {};
+        }
+
+        if (!categories[categoryIndex][initiativeIndex]) {
+          categories[categoryIndex][initiativeIndex] = {
+            'icon': getIconPath(initiativeIndex),
+          };
+        }
+
+      });
+    });
+  });
+  return categories;
+}
+
+function styleFunction(feature, resolution) {
+  var currentZoom = map.getView().getZoom();
+  var properties = feature.getProperties();
+  var initiative = properties.Initiative;
+
+  if ($('input[id="' + initiative + '"]:checkbox:checked').length == 1) {
+
+    if (initiative == 'Light rail extension') {
+
+      return [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: 'blue',
+          width: 1
+        }),
+        fill: new ol.style.Fill({
+          color: 'blue'
+        })
+      })];
+
+    } else if (initiative == 'Light Rail') {
+
+      return [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: 'yellow',
+          width: 2
+        }),
+        fill: new ol.style.Fill({
+          color: 'yellow'
+        })
+      })];
+
+    } else if (initiative == 'Street Car') {
+
+      return [new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: 'brown',
+          width: 2
+        }),
+        fill: new ol.style.Fill({
+          color: 'brown'
+        })
+      })];
+
+    }
+
+    if (currentZoom < zoom + 1) {
+      return [new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 2,
+          stroke: new ol.style.Stroke({
+            color: 'rgba(255,0,0,0.8)',
+            width: 5
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.8)'
+          })
+        })
+      })];
+    } else {
+      return [getMarkerIconStyle(getIconPath(initiative))];
+    }
+
+  } else {
+
+    return null;
+
+  }
 }
 
 function regionStyle(feature, resolution) {
@@ -604,60 +609,8 @@ function iconStyle(imageUri) {
   }));
 }
 
-
-function getFeatureStyleonZoom(feature) {
-  var properties = feature.getProperties();
-
-  if (properties.Initiative in subCategoriesCache && $('input[id="' + properties.Initiative + '"]:checkbox:checked').length == 1) {
-    var subCategory = subCategoriesCache[properties.Initiative];
-    var geometry = feature.getGeometry();
-    if (properties.Initiative == 'Light rail extension') {
-      return [new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: 'blue',
-          width: 1
-        }),
-        fill: new ol.style.Fill({
-          color: 'blue'
-        })
-      })];
-    }
-    if (properties.Initiative == 'Light Rail' || properties.Initiative == 'Street Car') {
-      return [new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: 'yellow',
-          width: 2
-        }),
-        fill: new ol.style.Fill({
-          color: 'yellow'
-        })
-      })];
-    }
-    return [getMarkerIconStyle(subCategory.icon)];
-  } else {
-    return null
-  }
-}
-
 function getMarkerIconStyle(uri) {
   return new ol.style.Style({
     image: iconStyle(uri)
   });
-}
-
-function styleFunction(feature, resolution) {
-  var featureStyleFunction = feature.getStyleFunction();
-  if (featureStyleFunction) {
-    return featureStyleFunction.call(feature, resolution);
-  } else {
-    return getStyle(feature, resolution);
-  }
-};
-
-function isEffortsLayer(layer) {
-  var layerName = layer.get('name');
-  if (layerName.indexOf('Efforts') > -1) {
-    return true;
-  }
-  return false;
 }

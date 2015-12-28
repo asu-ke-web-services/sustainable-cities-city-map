@@ -1,0 +1,206 @@
+{
+  "cities":[
+    {
+      "city":"Phoenix",
+      "initiatives":{
+        "Energy":{
+          "icon":"Solar Power.png",
+          "data":[
+            {
+              "url":"https://www.phoenix.gov/oep/environment/energy",
+              "description":"Energy Goals and Better Buildings Challenge"
+            },
+            {
+              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/conservation-program",
+              "description":"Energy Conservation Program"
+            },
+            {
+              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/building-retrofits",
+              "description":"Energy Efficiency Retrofit Program"
+            }
+          ]
+        },
+        "Infrastructure":{
+          "icon":"Green Building.png",
+          "data":[
+            {
+              "url":"https://www.phoenix.gov/pdd/devcode/phoenix-green-construction-code",
+              "description":"Gree Building Construction Code"
+            }
+          ]
+        },
+        "Transportation":{
+          "icon":"Bike share.png",
+          "data":[
+
+          ]
+        },
+        "Urban Farming/Forestry":{
+          "icon":"Urban Garden.png",
+          "data":[
+            {
+              "url":"https://www.phoenix.gov/parkssite/Documents/T%20and%20A%202010.pdf",
+              "description":"Tree and Shade Master Plan"
+            },
+            {
+              "url":"https://www.phoenix.gov/oepsite/Documents/PHX%20Cool%20Urban%20Spaces%20Report%20July%202014.pdf",
+              "description":"Cool Urban Spaces Project"
+            },
+            {
+              "url":"http://archive.azcentral.com/community/phoenix/articles/20131212tags-hanging-from-branches-in-phoenix-will-show-trees-economic-value.html",
+              "description":"Tree Tagging"
+            }
+          ]
+        },
+        "Urban Renewal":{
+          "icon":"Vacant lot revitalization.png",
+          "data":[
+            {
+              "url":"https://www.phoenix.gov/streetssite/Documents/Complete_Streets_Principles_Ordinance.pdf",
+              "description":"Complete Streets Program"
+            },
+            {
+              "url":"http://phxrenews.org/about",
+              "description":"Phoenix Renews"
+            },
+            {
+              "url":"http://www.reinventphx.org",
+              "description":"ReInventPHX"
+            }
+          ]
+        },
+        "Waste Recycling":{
+          "icon":"Compost.png",
+          "data":[
+
+          ]
+        },
+        "Indicator Reports":{
+          "icon":"",
+          "data":[
+            {
+              "url":"https://www.google.com",
+              "description":"GHG Emissions Report"
+            },
+            {
+              "url":"https://www.phoenix.gov/oepsite/Documents/d_026991.pdf",
+              "description":"Climate Action Report"
+            },
+            {
+              "url":"https://www.phoenix.gov/Documents/107504.pdf",
+              "description":"SustainPHX Report"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city":"Tempe",
+      "initiatives":{
+        "Energy":{
+          "icon":"Solar Power.png",
+          "data":[
+            {
+              "url":"http://www.tempe.gov/city-hall/public-works/water/water-quality/tempe-grease-cooperative",
+              "description":"Tempe Grease Cooperative"
+            },
+            {
+              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/conservation-program",
+              "description":"Energy Conservation Program"
+            },
+            {
+              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/building-retrofits",
+              "description":"Energy Efficiency Retrofit Program"
+            }
+          ]
+        },
+        "Infrastructure":{
+          "icon":"Green Building.png",
+          "data":[
+
+          ]
+        },
+        "Transportation":{
+          "icon":"Bike share.png",
+          "data":[
+            {
+              "url":"http://www.tempe.gov/home/showdocument?id=30317f",
+              "description":"Transportation Master Plan"
+            }
+          ]
+        },
+        "Urban Farming/Forestry":{
+          "icon":"Urban Garden.png",
+          "data":[
+
+          ]
+        },
+        "Urban Renewal":{
+          "icon":"Vacant lot revitalization.png",
+          "data":[
+            {
+              "url":"http://www.tempe.gov/city-hall/community-development/character-areas",
+              "description":"Character Areas"
+            }
+          ]
+        },
+        "Waste Recycling":{
+          "icon":"Compost.png",
+          "data":[
+            {
+              "url":"http://www.tempe.gov/Home/Components/News/News/3725/2641",
+              "description":"Tempe Food-Waste-to-Energy Study"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "city":"Mesa",
+      "initiatives":{
+        "Energy":{
+          "icon":"Solar Power.png",
+          "data":[
+
+          ]
+        },
+        "Infrastructure":{
+          "icon":"Green Building.png",
+          "data":[
+
+          ]
+        },
+        "Transportation":{
+          "icon":"Bike share.png",
+          "data":[
+
+          ]
+        },
+        "Urban Farming/Forestry":{
+          "icon":"Urban Garden.png",
+          "data":[
+
+          ]
+        },
+        "Urban Renewal":{
+          "icon":"Vacant lot revitalization.png",
+          "data":[
+
+          ]
+        },
+        "Waste Recycling":{
+          "icon":"Compost.png",
+          "data":[
+
+          ]
+        },
+        "Indicator Reports":{
+          "icon":"",
+          "data":[
+
+          ]
+        }
+      }
+    }
+  ]
+}
