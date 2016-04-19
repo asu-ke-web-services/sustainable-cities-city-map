@@ -166,8 +166,36 @@ function getURL(feature) {
   return feature.getProperties().URL_1;
 }
 
+function getCityLabelFeature( label, cords ) {
+  var style = [new ol.style.Style({
+    fill: new ol.style.Fill({
+      color: 'rgba(255, 255, 255, 0.6)'
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#319FD3',
+      width: 1
+    }),
+    text: new ol.style.Text({
+      font: '18px Calibri,sans-serif',
+      fill: new ol.style.Fill({
+        color: '#000'
+      }),
+      text: label,
+      stroke: new ol.style.Stroke({
+        color: '#fff',
+        width: 3
+      })
+    })
+  })];
 
+  labelFeature = new ol.Feature({
+    name: label,
+    geometry: new ol.geom.Point( cords )
+  });
 
+  labelFeature.setStyle(style);
+  return labelFeature;
+}
 
 function loadJsonOverAjax() {
   var a = $.Deferred();
@@ -182,6 +210,13 @@ function loadJsonOverAjax() {
         cityBoundaries[city] = {
           'layer': emptyVectorlayer(city, regionStyle)
         };
+        // Add a new dummy feature to display City name
+
+        var labelFeature = getCityLabelFeature(
+          feature.getProperties().NAME,
+          ol.extent.getCenter( feature.getGeometry().getExtent() )
+        );
+        cityBoundaries[city].layer.getSource().addFeature( labelFeature );
       }
       cityBoundaries[city].layer.getSource().addFeature(feature);
     });
@@ -343,7 +378,7 @@ function executeDataDependencyFunction() {
     });
 
 
-    var categoriesDiv = $.parseHTML('<a href="#" class="toggle-category">Select Category</a><div id="toggle-category-marker" class="toggle-category-marker"><a href="#" class="toggle-category-marker-closer"></a></div><div class="categoryListRadio"><dl class="categoryList"></dl></div>');
+    var categoriesDiv = $.parseHTML('<a href="#" class="toggle-category">Sustainability Initiatives</a><div id="toggle-category-marker" class="toggle-category-marker"><a href="#" class="toggle-category-marker-closer"></a></div><div class="categoryListRadio"><dl class="categoryList"></dl></div>');
 
     var dtTag = $(categoriesDiv).find('.categoryList');
     categories = getCategories();
@@ -427,7 +462,10 @@ function executeDataDependencyFunction() {
   ol.inherits(ResetMapControl, ol.control.Control);
   map.addControl(new ResetMapControl());
 
-  map.on('singleclick', function(evt) {
+  map.on('pointermove', function(evt) {
+    if (evt.dragging) {
+      return;
+    }
     var informationContent = '';
     var overlayCoordinate = evt.coordinate;
     var foundEffort = false;
@@ -470,8 +508,8 @@ function executeDataDependencyFunction() {
   });
 
   map.addControl(categoryFeatureController);
-  $('.categoryListRadio').hide();
-  $('.toggle-category-marker-closer').toggleClass('lower');
+  //$('.categoryListRadio').hide();
+  //$('.toggle-category-marker-closer').toggleClass('lower');
 
   $('.toggle-category-marker').on('click', function() {
     $('.categoryListRadio').toggle('slow');
@@ -522,7 +560,6 @@ function styleFunction(feature, resolution) {
   if ($('input[id="' + initiative + '"]:checkbox:checked').length == 1) {
 
     if (initiative == 'Light rail extension') {
-
       return [new ol.style.Style({
         stroke: new ol.style.Stroke({
           color: 'blue',
@@ -549,11 +586,11 @@ function styleFunction(feature, resolution) {
 
       return [new ol.style.Style({
         stroke: new ol.style.Stroke({
-          color: 'brown',
+          color: 'red',
           width: 2
         }),
         fill: new ol.style.Fill({
-          color: 'brown'
+          color: 'red'
         })
       })];
 
@@ -577,9 +614,7 @@ function styleFunction(feature, resolution) {
     }
 
   } else {
-
     return null;
-
   }
 }
 
@@ -590,7 +625,7 @@ function regionStyle(feature, resolution) {
       color: properties.color !== undefined ? properties.color : 'rgba(0,255,255,0.5)'
     }),
     stroke: new ol.style.Stroke({
-      color: properties.strokeColor !== undefined ? properties.strokeColor : 'rgba(0,0,0,0.5)',
+      color: properties.strokeColor !== undefined ? properties.strokeColor : 'rgba(0, 0, 0,1)',
       width: 1
     })
   })];

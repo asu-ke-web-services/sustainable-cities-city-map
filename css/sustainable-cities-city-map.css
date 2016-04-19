@@ -98,7 +98,7 @@ canvas {
 }
 .sub-category-list-icon{
   display: inline;
-  height: 13px;
+  height: 24px;
 }
 
 
@@ -185,11 +185,23 @@ canvas {
   text-decoration: none !important;
 }
 .toggle-category-marker-closer:after {
-  content: 'x';
+  content: '';
+  border: 5px solid transparent;
+  border-bottom: 6px solid;
+  margin-left: 2px;
+  margin-bottom: 3px;
+  display: inline-block;
+  vertical-align: middle;
   font-weight: bold;
 }
 .toggle-category-marker-closer.lower:after {
-  content: '+';
+  content: '';
+  border: 5px solid transparent;
+  border-top: 6px solid;
+  margin-left: 2px;
+  margin-bottom: 3px;
+  display: inline-block;
+  vertical-align: bottom;
   font-weight: bold;
 }
 .toggle-category{
