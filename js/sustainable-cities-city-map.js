@@ -90,8 +90,6 @@ function emptyVectorlayer(name, style) {
   });
 }
 
-
-
 function getPopUpContent(feature) {
   var content = '<div class="feature-information">';
   content += '<h4><b>' + getTitleMarkUp(feature) + '</b></h4>' + '<p>' + getBuildingMarkUp(feature) + '</p>' + '<p>' + getLocationMarkUp(feature) + '</p>' + '<p>' + getDescriptionMarkUp(feature) + '</p>' + '<p>' + getURLMarkUp(feature) + '</p><br>';
@@ -176,7 +174,7 @@ function getCityLabelFeature( label, cords ) {
       width: 1
     }),
     text: new ol.style.Text({
-      font: '18px Calibri,sans-serif',
+      font: '15px Calibri,sans-serif',
       fill: new ol.style.Fill({
         color: '#000'
       }),
@@ -206,19 +204,22 @@ function loadJsonOverAjax() {
     var allCities = format.readFeatures(geojsonObject);
     $.each(allCities, function(index, feature) {
       var city = feature.getProperties().NAME;
-      if (!cityBoundaries[city]) {
-        cityBoundaries[city] = {
-          'layer': emptyVectorlayer(city, regionStyle)
-        };
-        // Add a new dummy feature to display City name
+      var visibility = feature.getProperties().visibility;
+      if(visibility){
+        if (!cityBoundaries[city]) {
+          cityBoundaries[city] = {
+            'layer': emptyVectorlayer(city, regionStyle)
+          };
+          // Add a new dummy feature to display City name
 
-        var labelFeature = getCityLabelFeature(
-          feature.getProperties().NAME,
-          ol.extent.getCenter( feature.getGeometry().getExtent() )
-        );
-        cityBoundaries[city].layer.getSource().addFeature( labelFeature );
+          var labelFeature = getCityLabelFeature(
+            feature.getProperties().NAME,
+            ol.extent.getCenter( feature.getGeometry().getExtent() )
+          );
+          cityBoundaries[city].layer.getSource().addFeature( labelFeature );
+        }
+        cityBoundaries[city].layer.getSource().addFeature(feature);
       }
-      cityBoundaries[city].layer.getSource().addFeature(feature);
     });
     a.resolve();
   });
@@ -418,7 +419,16 @@ function executeDataDependencyFunction() {
     // changes mouse cursor to pointer while over marker
     var pixel = map.getEventPixel(evt.originalEvent);
     var hit = map.hasFeatureAtPixel(pixel);
-    map.getTarget().style.cursor = hit ? 'pointer' : '';
+    map.getTarget().style.cursor = ''
+    if(hit){
+      map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+
+        if( isFeatureFromEffortLayer( feature ) ){
+          map.getTarget().style.cursor = hit ? 'pointer' : '';
+          return true;
+        }
+      });
+   }
   });
 
   var resetMap = function() {
@@ -462,28 +472,23 @@ function executeDataDependencyFunction() {
   ol.inherits(ResetMapControl, ol.control.Control);
   map.addControl(new ResetMapControl());
 
-  map.on('pointermove', function(evt) {
+  map.on('click', function(evt) {
     if (evt.dragging) {
       return;
     }
     var informationContent = '';
     var overlayCoordinate = evt.coordinate;
-    var foundEffort = false;
     map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
 
       if (feature) {
-        var properties = feature.getProperties();
-
-        if (!properties.NAME && properties.City) { //If feature is from effort layer
+        if( isFeatureFromEffortLayer( feature ) ){
           informationContent = informationContent + getPopUpContent(feature);
-          foundEffort = true;
         }
-
       } else {
         resetMap();
       }
-
     });
+
     if (informationContent != '') {
       popUpContent.innerHTML = informationContent;
       overlay.setPosition(overlayCoordinate);
@@ -526,6 +531,15 @@ function executeDataDependencyFunction() {
 
 }
 
+function isFeatureFromEffortLayer( feature ) {
+  if (feature) {
+    var properties = feature.getProperties();
+    if (!properties.NAME && properties.City) { //If feature is from effort layer
+      return true;
+    }
+  }
+  return false;
+}
 function getIconPath(name) {
   return 'icons/' + name + '.png';
 }
@@ -610,7 +624,7 @@ function styleFunction(feature, resolution) {
         })
       })];
     } else {
-      return [getMarkerIconStyle(getIconPath(initiative))];
+      return getMarkerIconStyle(getIconPath(initiative),properties);
     }
 
   } else {
@@ -638,14 +652,13 @@ function iconStyle(imageUri) {
     anchor: [0.5, 20],
     anchorXUnits: 'fraction',
     anchorYUnits: 'pixels',
-    opacity: 1,
     scale: 1,
-    src: imageUri
+    src: imageUri,
   }));
 }
 
-function getMarkerIconStyle(uri) {
-  return new ol.style.Style({
+function getMarkerIconStyle(uri,properties) {
+  return [new ol.style.Style({
     image: iconStyle(uri)
-  });
+  })];
 }
