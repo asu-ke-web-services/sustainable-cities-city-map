@@ -11,22 +11,11 @@ h1 {
     color: #33CCFF;
 }
 
-.sustainable-map-cities {
-  bottom: 15px;
-  left: 15px;
+.ol-mouse-position{
+  top: 8px;
+  right: 400px;
+  position: absolute;
   background-color: rgba(225,225,225,1);
-}
-
-.sustainable-map-cities:hover {
-  bottom: 15px;
-  left: 15px;
-  background-color: rgba(225,225,225,1);
-}
-
-
-.sustainable-map-cities__header{
-  text-align: left;
-  font-weight: bold;
 }
 
 .sustainable-map-categories {
@@ -112,8 +101,6 @@ canvas {
   border: 1px solid #cccccc;
   bottom: 12px;
   left: -50px;
-
-
 }
 
 #popup-content{

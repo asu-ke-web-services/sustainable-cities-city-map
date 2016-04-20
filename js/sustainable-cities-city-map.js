@@ -23,12 +23,18 @@ var baseLayer = new ol.layer.Tile({
   name: 'base'
 });
 
+var mousePositionControl = new ol.control.MousePosition({
+  coordinateFormat: ol.coordinate.createStringXY(4),
+  projection: 'EPSG:3857',
+  undefinedHTML: '&nbsp;'
+});
+
 //Create controls for the map
 var controls = ol.control.defaults({
   attributionOptions: ({
     collapsible: false
   })
-});
+}).extend([mousePositionControl]);
 
 // Create a view and set the center position
 var center = [-12460275.74916, 3975561.97282];
@@ -76,6 +82,7 @@ var map = new ol.Map({
   overlays: [overlay],
   view: view
 });
+
 
 
 function emptyVectorlayer(name, style) {
@@ -574,55 +581,15 @@ function styleFunction(feature, resolution) {
   if ($('input[id="' + initiative + '"]:checkbox:checked').length == 1) {
 
     if (initiative == 'Light rail extension') {
-      return [new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: 'blue',
-          width: 1
-        }),
-        fill: new ol.style.Fill({
-          color: 'blue'
-        })
-      })];
-
+      return getLineStringStyle( '#00FFFE' );
     } else if (initiative == 'Light Rail') {
-
-      return [new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: 'yellow',
-          width: 2
-        }),
-        fill: new ol.style.Fill({
-          color: 'yellow'
-        })
-      })];
-
+      return getLineStringStyle( '#6F1C9A' );
     } else if (initiative == 'Street Car') {
-
-      return [new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: 'red',
-          width: 2
-        }),
-        fill: new ol.style.Fill({
-          color: 'red'
-        })
-      })];
-
+      return getLineStringStyle( '#FFF200' );
     }
 
     if (currentZoom < zoom + 1) {
-      return [new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 2,
-          stroke: new ol.style.Stroke({
-            color: 'rgba(255,0,0,0.8)',
-            width: 5
-          }),
-          fill: new ol.style.Fill({
-            color: 'rgba(255,0,0,0.8)'
-          })
-        })
-      })];
+      return getCircleStyle( 'rgba(255,0,0,0.8)', 'rgba(0,0,0,1)' );
     } else {
       return getMarkerIconStyle(getIconPath(initiative),properties);
     }
@@ -660,5 +627,29 @@ function iconStyle(imageUri) {
 function getMarkerIconStyle(uri,properties) {
   return [new ol.style.Style({
     image: iconStyle(uri)
+  })];
+}
+
+function getLineStringStyle( strokeColor  ){
+  return [new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: strokeColor,
+      width: 3
+    })
+  })];
+}
+
+function getCircleStyle( fillColor, strokeColor ){
+  return [new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 4,
+      stroke: new ol.style.Stroke({
+        color: strokeColor,
+        width: 1
+      }),
+      fill: new ol.style.Fill({
+        color: fillColor
+      })
+    })
   })];
 }
