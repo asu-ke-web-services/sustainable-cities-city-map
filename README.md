@@ -1,4 +1,6 @@
 # sustainable-cities-city-map
+[![Build Status](https://travis-ci.org/gios-asu/sustainable-cities-city-map.svg?branch=master)](https://travis-ci.org/gios-asu/sustainable-cities-city-map)
+
 This map is for the https://sustainablecities.asu.edu/ website.
 
 This map uses coordinate system in `EPSG:3857` format. The CSV file `AllEfforts.csv` is in already in `EPSG:3857` format, however any new features added may need to be converted.
