@@ -3,8 +3,11 @@ node_js:
   - "6"
 before_script:
   - npm install -g jsonlint
+  - gem install html-proofer
 script: 
   # someday jsonlint might be able to take multiple files.. until then:
   - jsonlint -q GeoJSON/AllEfforts.geojson 
+  - jsonlint -q GeoJSON/cities-reference.geojson 
   - jsonlint -q GeoJSON/cities.geojson 
-  - jsonlint -q GeoJSON/Reports.geojson 
+  - jsonlint -q GeoJSON/Reports.json 
+  - htmlproofer . --allow-hash-href
