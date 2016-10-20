@@ -12,3 +12,6 @@ The CSV gile should be able to be converted into a GeoJSON files by qGIS.
   * Select both Points and LineString layers 
   * Click on each layer and save as geojson 
   * Combine both geojson files into a single geojson file by copy and pasting the features alone from second file to first file.
+The Spreadsheet should be able to be converted into a GeoJSON files by qGIS.
+
+
