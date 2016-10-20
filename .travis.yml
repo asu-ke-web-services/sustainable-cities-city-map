@@ -4,7 +4,7 @@ rvm:
 
 before_script:
   - npm install -g jsonlint
-  - gem install html-proofer # requires ruby >= 2.2.2
+  # - gem install html-proofer # requires ruby >= 2.2.2
 script: 
   # someday jsonlint might be able to take multiple files.. until then:
   - jsonlint -q GeoJSON/AllEfforts.geojson 
