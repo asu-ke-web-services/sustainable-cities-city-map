@@ -1,0 +1,20 @@
+{
+  "author": "GIOS-ASU",
+  "name": "sustainable-cities-city-map",
+  "description": "Interactive map showing sustainable efforts in nearby cities",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gios-asu/sustainable-cities-city-map.git"
+  },
+  "bugs": {
+    "url": "http://github.com/gios-asu/sustainable-cities-city-map/issues"
+  },
+  "devDependencies": {
+    "jsonlint": "*"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "homepage": "http://github.com/gios-asu/sustainable-cities-city-map"
+}
