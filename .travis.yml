@@ -1,9 +1,10 @@
-language: node_js
-node_js:
-  - "6"
+language: ruby
+ruby: 
+  - 2.2.2
+
 before_script:
   - npm install -g jsonlint
-  - gem install html-proofer
+  - gem install html-proofer # requires ruby >= 2.2.2
 script: 
   # someday jsonlint might be able to take multiple files.. until then:
   - jsonlint -q GeoJSON/AllEfforts.geojson 
