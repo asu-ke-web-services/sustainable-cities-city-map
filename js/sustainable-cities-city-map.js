@@ -246,7 +246,7 @@ function loadJsonOverAjax() {
       $.each(report, function(cityIndex, cityData) {
         var city = cityData.city;
         var initiatives = cityData.initiatives;
-        var header = $('<h4>').text( city + ' Plans/Reports');
+        var header = $('<h4>').text('City of ' + city + ' Plans/Reports');
         var reportsDiv=$('<div class="table-reponsive">');
         var table= $('<table class="table table-bordered">');
         $.each(initiatives, function(intiativeIndex, initiative) {

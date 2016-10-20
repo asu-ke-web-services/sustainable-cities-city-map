@@ -11,12 +11,12 @@
               "description":"Energy Goals and Better Buildings Challenge"
             },
             {
-              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/conservation-program",
+              "url":"https://www.phoenix.gov/oep/environment/energy",
               "description":"Energy Conservation Program"
             },
             {
-              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/building-retrofits",
-              "description":"Energy Efficiency Retrofit Program"
+              "url":"https://www.phoenix.gov/publicworks/energize-phoenix",
+              "description":"Energize Phoenix"
             }
           ]
         },
@@ -25,7 +25,7 @@
           "data":[
             {
               "url":"https://www.phoenix.gov/pdd/devcode/phoenix-green-construction-code",
-              "description":"Gree Building Construction Code"
+              "description":"Green Building Construction Code"
             }
           ]
         },
@@ -48,7 +48,7 @@
             },
             {
               "url":"http://archive.azcentral.com/community/phoenix/articles/20131212tags-hanging-from-branches-in-phoenix-will-show-trees-economic-value.html",
-              "description":"Tree Tagging"
+              "description":"Tree Value Tags"
             }
           ]
         },
@@ -79,7 +79,11 @@
           "icon":"",
           "data":[
             {
-              "url":"https://www.google.com",
+              "url":"https://www.phoenix.gov/oep/environment/climate",
+              "description":"Phoenix Climate Action Plan"
+            },
+            {
+              "url":"https://www.phoenix.gov/Documents/106458.pdf",
               "description":"GHG Emissions Report"
             },
             {
@@ -109,8 +113,8 @@
               "description":"Energy Conservation Program"
             },
             {
-              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation/building-retrofits",
-              "description":"Energy Efficiency Retrofit Program"
+              "url":"http://www.tempe.gov/city-hall/public-works/energy-conservation",
+              "description":"Tempe Energy Conservation and Solar"
             }
           ]
         },
@@ -124,7 +128,7 @@
           "icon":"Bike share.png",
           "data":[
             {
-              "url":"http://www.tempe.gov/home/showdocument?id=30317f",
+              "url":"http://www.tempe.gov/city-hall/public-works/transportation/transportation-master-plan",
               "description":"Transportation Master Plan"
             }
           ]
@@ -148,7 +152,7 @@
           "icon":"Compost.png",
           "data":[
             {
-              "url":"http://www.tempe.gov/Home/Components/News/News/3725/2641",
+              "url":"http://www.tempe.gov/city-hall/public-works/sustainable-tempe/sustainable-tempe-news",
               "description":"Tempe Food-Waste-to-Energy Study"
             }
           ]
@@ -161,25 +165,41 @@
         "Energy":{
           "icon":"Solar Power.png",
           "data":[
-
+            {
+              "url":"http://www.mesaaz.gov/residents/sustainability/solar-resources",
+              "description":"Mesa Solar Resources"
+            }
           ]
         },
         "Infrastructure":{
           "icon":"Green Building.png",
           "data":[
-
+            {
+              "url":"http://www.mesaaz.gov/residents/water-conservation",
+              "description":"Water Conservation"
+            }
           ]
         },
         "Transportation":{
           "icon":"Bike share.png",
           "data":[
-
+            {
+              "url":"http://www.mesaaz.gov/residents/transportation",
+              "description":"Mesa Transportation"
+            }
           ]
         },
         "Urban Farming/Forestry":{
           "icon":"Urban Garden.png",
           "data":[
-
+            {
+              "url":"http://mesaurbangarden.org/",
+              "description":"Mesa Urban Garden"
+            },
+            {
+              "url":"http://www.mesaaz.gov/residents/sustainability/arbor-day",
+              "description":"Tree City USA"
+            }
           ]
         },
         "Urban Renewal":{
@@ -191,7 +211,10 @@
         "Waste Recycling":{
           "icon":"Compost.png",
           "data":[
-
+            {
+              "url":"http://mesaaz.gov/residents/solid-waste-trash-recycling/mesa-recycles",
+              "description":"Mesa Recycles"
+            }
           ]
         },
         "Indicator Reports":{
