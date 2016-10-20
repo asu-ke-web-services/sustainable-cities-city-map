@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
-                                                                                
-"features": [
-{ "type": "Feature", "properties": { "wkt_geom": "POINT(-12463032.74353550933301449 3952899.24212063895538449)", "City": "Tempe", "Initiative": "Waste Recycling", "Location": "N. Rio Rd. Tempe AZ", "Latitude": 33.432848, "Longitude": -111.957328, "Building": "City composting", "URL_1": "<a target=\"_blank\" href =\"http:\/\/www.tempe.gov\/city-hall\/public-works\/recycling-and-solid-waste\/green-organics\">Learn more<\/a>", "Info": null, "Describe": "This city composting site processes residential green waste." }, "geometry": { "type": "Point", "coordinates": [ -12463032.743535509, 3952899.2422364182 ] } }
-]
-}
